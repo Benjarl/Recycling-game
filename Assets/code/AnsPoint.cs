@@ -8,6 +8,7 @@ public class AnsPoint : MonoBehaviour
 {
     public int point = 0;
     public Text pointtext;
+    public AudioSource correct;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +25,6 @@ public class AnsPoint : MonoBehaviour
     public void addpoint()
     {
         point++;
+        correct.Play();
     }
 }

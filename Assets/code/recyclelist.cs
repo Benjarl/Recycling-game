@@ -26,6 +26,7 @@ public class recyclelist : MonoBehaviour
     public GameObject TimelefttextO;
     public int tasknum = 0;
     public string now;
+    public AudioSource wrongaudio;
 
     public Text UserName;
     public Text Level;
@@ -134,6 +135,7 @@ public class recyclelist : MonoBehaviour
     public void wrong()  //錯誤題號
     {
         Wrongans.text = Wrongans.text + number + ' ';
+        wrongaudio.Play();
     }
 
     void end()  //結算
