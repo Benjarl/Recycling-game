@@ -35,12 +35,12 @@ public class GameApplication : MonoSingleton<GameApplication>
     public void StartGameFlow(GameFlowData flowData)
     {
         FlowData = flowData;
-        GameSceneManager.Instance.ChangeScene(new List<Action>()   
+        GameSceneManager.Instance.ChangeScene(new List<Action>()
         {
-            
-            
+            GameUIManager.Instance.StartGameUiLogic
 
-        });
+
+        }, GobalData.GameScene);
     }
 
     public void ManagersDispose()

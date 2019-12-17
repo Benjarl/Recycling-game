@@ -5,6 +5,7 @@ using GameData;
 using UnityEngine;
 using UnityEngine.UI;
 using LabData;
+using System.IO;
 
 public class recyclelist : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class recyclelist : MonoBehaviour
     public Text Timelefttext;
     public GameObject TimelefttextO;
     public int tasknum = 0;
+    public string now;
 
     public Text UserName;
     public Text Level;
@@ -42,6 +44,7 @@ public class recyclelist : MonoBehaviour
             if (trashnumber[j] == ' ')
                 tasknum++;
         }
+        UserName.text = GameApplication.FlowData.UserId;
         Level.text = GameDataManager.Instance.NowTaskData.LevelName;
         if (GameDataManager.Instance.NowTaskData.Mode == 0)
             Mode.text = "新手";
@@ -147,6 +150,15 @@ public class recyclelist : MonoBehaviour
         GamePanel.SetActive(false);
         EndPanel.SetActive(true);
         Trash.SetActive(false);
+
+        //存檔
+        var Data = new UserData(UserName.text, Level.text, Mode.text, Rightans.text, Wrongans.text);
+        now = System.DateTime.Now.ToString("R");
+        Debug.Log(now);
+        now = now.Replace(",", "");
+        now = now.Replace(":", " ");
+        Debug.Log(now);
+        LabTools.WriteData(Data, UserName.text + " " + now);
     }
 
     void changetag(int number)  //分類
@@ -164,30 +176,35 @@ public class recyclelist : MonoBehaviour
         {
             GameObject.Find("Cube").tag = "紙容器類";
             TrashOne.color = new Color32(0, 0, 255, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (13 <= number && number <= 20)
         {
             GameObject.Find("Cube").tag = "塑膠類";
             TrashOne.color = new Color32(0, 0, 255, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (21 <= number && number <= 28)
         {
             GameObject.Find("Cube").tag = "玻璃類";
             TrashOne.color = new Color32(0, 0, 255, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (29 <= number && number <= 30)
         {
             GameObject.Find("Cube").tag = "鐵鋁罐類";
             TrashOne.color = new Color32(0, 0, 255, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (31 <= number && number <= 33)
         {
             GameObject.Find("Cube").tag = "舊衣類";
             TrashOne.color = new Color32(0, 255, 0, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (34 <= number && number <= 41)
@@ -201,12 +218,14 @@ public class recyclelist : MonoBehaviour
         {
             GameObject.Find("Cube").tag = "保麗龍類";
             TrashOne.color = new Color32(0, 0, 255, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (44 <= number && number <= 54)
         {
             GameObject.Find("Cube").tag = "電器類";
             TrashOne.color = new Color32(0, 0, 255, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (55 <= number && number <= 59)
@@ -220,6 +239,7 @@ public class recyclelist : MonoBehaviour
         {
             GameObject.Find("Cube").tag = "不可回收";
             TrashOne.color = new Color32(0, 0, 0, 225);
+            TrashTwo.color = new Color32(0, 0, 255, 0);
         }
         if (GameDataManager.Instance.NowTaskData.Mode > 0)
         {

@@ -9,16 +9,12 @@ using System.IO;
 
 public class MainUI : MonoBehaviour
 {
-    public RemindType UI_RemindType;
+    public RemindType UI_RemindType = RemindType.TextVoice;
 
-    public Language UI_Language;
+    public Language UI_Language = Language.English;
 
     public string UI_UserID;
 
-    public void StartButton()
-    {
-        GameApplication.Instance.StartGameFlow(new GameFlowData(UI_RemindType, UI_Language, UI_UserID));
-    }
 
     public static string startpath;
 
@@ -115,7 +111,8 @@ public class MainUI : MonoBehaviour
 
         NextBotton.onClick.AddListener(delegate
         {
-            GameApplication.Instance.UserID = InputUserName.text;
+            UI_UserID = InputUserName.text;
+            GameApplication.Instance.StartGameFlow(new GameFlowData(UI_RemindType, UI_Language, UI_UserID));
             //搜尋對應現有的任務
             List<string> temp = new List<string>();
             temp = LabTools.GetDataName<TaskData>();
@@ -128,11 +125,6 @@ public class MainUI : MonoBehaviour
                     break;
                 }
             }
-
-            GameSceneManager.Instance.ChangeScene(new List<Action>()
-            {
-                GameUIManager.Instance.StartGameUiLogic
-            }, GobalData.GameScene);
         });
 
         Leave.onClick.AddListener(delegate
