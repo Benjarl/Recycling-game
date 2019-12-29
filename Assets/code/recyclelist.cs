@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using LabData;
 using System.IO;
+using Valve.VR;
 
 public class recyclelist : MonoBehaviour
 {
@@ -27,7 +28,8 @@ public class recyclelist : MonoBehaviour
     public int tasknum = 0;
     public string now;
     public AudioSource wrongaudio;
-    public GameObject Camer;
+    public GameObject Plaform;
+    public GameObject Allobject;
 
     public Text UserName;
     public Text Level;
@@ -54,7 +56,7 @@ public class recyclelist : MonoBehaviour
             Mode.text = "提示";
         else if (GameDataManager.Instance.NowTaskData.Mode == 2)
             Mode.text = "挑戰";
-        Camer.transform.position = Trash.transform.position - new Vector3(0.02f, 0f, 0.68f);
+        Allobject.transform.position = SteamVR_Render.Top().head.position + new Vector3(0f, 0f, 0.68f);
     }
 
     // Update is called once per frame
@@ -250,5 +252,10 @@ public class recyclelist : MonoBehaviour
             TrashOne.color = new Color32(0, 225, 0, 0);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
+    }
+
+    public void reposition()
+    {
+        Trash.transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
     }
 }

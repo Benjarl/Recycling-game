@@ -29,7 +29,7 @@ public class cantrecycle : MonoBehaviour
             Recyclelist.wrong();
         }
         Recyclelist.changenum();
-        GameObject.Find("Cube").transform.position = new Vector3(-0.13f, 0.6f, -0.001f);
+        Recyclelist.reposition();
     }
 
     public void norecycletoday() //今日不可回收
@@ -79,6 +79,6 @@ public class cantrecycle : MonoBehaviour
         }
 
         Recyclelist.changenum();
-        GameObject.Find("Cube").transform.position = new Vector3(-0.13f, 0.6f, -0.001f);
+        Recyclelist.reposition();
     }
 }
