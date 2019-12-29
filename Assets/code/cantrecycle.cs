@@ -16,7 +16,7 @@ public class cantrecycle : MonoBehaviour
         
     }
 
-    public void norecycle() //不可回收
+    public void norecycle() //一般垃圾
     {
         recyclelist Recyclelist = FindObjectOfType<recyclelist>();
         if (GameObject.Find("Cube").tag == "不可回收")
@@ -29,7 +29,7 @@ public class cantrecycle : MonoBehaviour
             Recyclelist.wrong();
         }
         Recyclelist.changenum();
-        GameObject.Find("Cube").transform.position = new Vector3(0.0f, 4.5f, 0.0f);
+        GameObject.Find("Cube").transform.position = new Vector3(-0.13f, 0.6f, -0.001f);
     }
 
     public void norecycletoday() //今日不可回收
@@ -79,6 +79,6 @@ public class cantrecycle : MonoBehaviour
         }
 
         Recyclelist.changenum();
-        GameObject.Find("Cube").transform.position = new Vector3(0.0f, 4.5f, 0.0f);
+        GameObject.Find("Cube").transform.position = new Vector3(-0.13f, 0.6f, -0.001f);
     }
 }

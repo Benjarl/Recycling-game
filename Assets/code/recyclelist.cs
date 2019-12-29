@@ -16,7 +16,7 @@ public class recyclelist : MonoBehaviour
     public static int i = 0;
     public Text Timedetext;
     public GameObject TimedttextO;
-    public int timed = 3;
+    public int timed = 10;
     public GameObject GamePanel;
     public GameObject EndPanel;
     public GameObject Trash;
@@ -27,6 +27,7 @@ public class recyclelist : MonoBehaviour
     public int tasknum = 0;
     public string now;
     public AudioSource wrongaudio;
+    public GameObject Camer;
 
     public Text UserName;
     public Text Level;
@@ -53,6 +54,7 @@ public class recyclelist : MonoBehaviour
             Mode.text = "提示";
         else if (GameDataManager.Instance.NowTaskData.Mode == 2)
             Mode.text = "挑戰";
+        Camer.transform.position = Trash.transform.position - new Vector3(0.02f, 0f, 0.68f);
     }
 
     // Update is called once per frame
@@ -63,7 +65,7 @@ public class recyclelist : MonoBehaviour
 
     public void timede() //開始倒數
     {
-        timed = 3;
+        timed = 10;
         InvokeRepeating("timer", 1, 1);
         TimedttextO.SetActive(true);
         GamePanel.SetActive(false);
@@ -74,7 +76,7 @@ public class recyclelist : MonoBehaviour
     void timer()
     {
         timed--;
-        Timedetext.text = timed + "";
+        Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 
         if (timed == 0)
         {
@@ -159,7 +161,7 @@ public class recyclelist : MonoBehaviour
         Debug.Log(now);
         now = now.Replace(",", "");
         now = now.Replace(":", " ");
-        Debug.Log(now);
+        now = now.Substring(15, 6);
         LabTools.WriteData(Data, UserName.text + " " + now);
     }
 

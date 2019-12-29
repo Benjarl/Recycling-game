@@ -39,7 +39,7 @@ public class triggerPapper : MonoBehaviour
                 Recyclelist.wrong();
             }
             Recyclelist.changenum();
-            other.gameObject.transform.position = new Vector3(-0.1f, 0.6f, -0.001f);
+            other.gameObject.transform.position = new Vector3(-0.13f, 0.6f, -0.001f);
             other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
             
