@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class triggerClothes : MonoBehaviour
+public class triggerTrash : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -21,24 +21,18 @@ public class triggerClothes : MonoBehaviour
         if (other.gameObject.name == "Cube")
         {
             recyclelist Recyclelist = FindObjectOfType<recyclelist>();
-            if (other.gameObject.tag == "舊衣類")
+            if (other.gameObject.tag == "不可回收")
             {
-                if (recyclelist.day == 1 || recyclelist.day == 5)
-                {
-                    AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
-                    ansPoint.addpoint();
-                }
-                else
-                {
-                    Recyclelist.wrong();
-                }
+                AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
+                ansPoint.addpoint();
             }
             else
             {
                 Recyclelist.wrong();
             }
-            Recyclelist.changenum();
             Recyclelist.reposition();
+            Recyclelist.changenum();
+            
             other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
         

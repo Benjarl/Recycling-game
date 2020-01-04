@@ -37,8 +37,8 @@ public class triggerBettery : MonoBehaviour
             {
                 Recyclelist.wrong();
             }
-            Recyclelist.changenum();
             Recyclelist.reposition();
+            Recyclelist.changenum();          
             other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
     }

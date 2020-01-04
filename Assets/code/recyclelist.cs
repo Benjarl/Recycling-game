@@ -28,8 +28,12 @@ public class recyclelist : MonoBehaviour
     public int tasknum = 0;
     public string now;
     public AudioSource wrongaudio;
+    public AudioSource startaudio;
     public GameObject Plaform;
     public GameObject Allobject;
+    public Text TimeAns;
+    public int timewaste = 0;
+    public int trashnum = 0;
 
     public Text UserName;
     public Text Level;
@@ -69,6 +73,7 @@ public class recyclelist : MonoBehaviour
     {
         timed = 10;
         InvokeRepeating("timer", 1, 1);
+        startaudio.Play();
         TimedttextO.SetActive(true);
         GamePanel.SetActive(false);
         EndPanel.SetActive(false);
@@ -132,8 +137,13 @@ public class recyclelist : MonoBehaviour
             Recyclelisttext.recycletext(number);
             Recyclelisttext.recycleday(day);
             changetag(number);
+            InvokeRepeating("timecost", 1, 1);
         }
-        
+    }
+    //答題時間
+    void timecost()
+    {
+        timewaste++;
     }
 
     public void wrong()  //錯誤題號
@@ -158,12 +168,11 @@ public class recyclelist : MonoBehaviour
         Trash.SetActive(false);
 
         //存檔
-        var Data = new UserData(UserName.text, Level.text, Mode.text, Rightans.text, Wrongans.text);
+        var Data = new UserData(UserName.text, Level.text, Mode.text, Rightans.text, Wrongans.text, TimeAns.text);
         now = System.DateTime.Now.ToString("R");
         Debug.Log(now);
-        now = now.Replace(",", "");
-        now = now.Replace(":", " ");
-        now = now.Substring(15, 6);
+        now = now.Replace(",", "_");
+        now = now.Replace(":", "_");
         LabTools.WriteData(Data, UserName.text + " " + now);
     }
 
@@ -199,17 +208,10 @@ public class recyclelist : MonoBehaviour
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
-        else if (29 <= number && number <= 30)
+        else if (29 <= number && number <= 33)
         {
             GameObject.Find("Cube").tag = "鐵鋁罐類";
             TrashOne.color = new Color32(0, 0, 255, 225);
-            TrashTwo.color = new Color32(0, 0, 255, 0);
-        }
-
-        else if (31 <= number && number <= 33)
-        {
-            GameObject.Find("Cube").tag = "舊衣類";
-            TrashOne.color = new Color32(0, 255, 0, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
@@ -253,9 +255,19 @@ public class recyclelist : MonoBehaviour
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
     }
-
+    //重製位置 重製答題時間
     public void reposition()
     {
         Trash.transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
+        CancelInvoke("timecost");
+        TimeAns.text = TimeAns.text + timewaste + '秒' + '\n';
+        timewaste = 0;
+    }
+
+    //答題間隔
+    public void timecosttext(string recycle)
+    {
+        trashnum++;
+        TimeAns.text = TimeAns.text + trashnum + '.' + number + ':' + recycle + ' ';
     }
 }

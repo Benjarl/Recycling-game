@@ -16,22 +16,6 @@ public class cantrecycle : MonoBehaviour
         
     }
 
-    public void norecycle() //一般垃圾
-    {
-        recyclelist Recyclelist = FindObjectOfType<recyclelist>();
-        if (GameObject.Find("Cube").tag == "不可回收")
-        {
-            AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
-            ansPoint.addpoint();
-        }
-        else
-        {
-            Recyclelist.wrong();
-        }
-        Recyclelist.changenum();
-        Recyclelist.reposition();
-    }
-
     public void norecycletoday() //今日不可回收
     {
         recyclelist Recyclelist = FindObjectOfType<recyclelist>();
@@ -48,7 +32,7 @@ public class cantrecycle : MonoBehaviour
             }
         }
 
-        else if(GameObject.Find("Cube").tag == "紙類" || GameObject.Find("Cube").tag == "舊衣")
+        else if(GameObject.Find("Cube").tag == "紙類")
         {
             if (recyclelist.day == 2 || recyclelist.day == 4 || recyclelist.day == 6)
             {
@@ -77,8 +61,8 @@ public class cantrecycle : MonoBehaviour
         {
             Recyclelist.wrong();
         }
-
-        Recyclelist.changenum();
         Recyclelist.reposition();
+        Recyclelist.changenum();
+        
     }
 }

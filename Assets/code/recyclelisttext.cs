@@ -161,13 +161,13 @@ public class recyclelisttext : MonoBehaviour
                 recyclething.text = "鋁罐";
                 break;
             case 31:
-                recyclething.text = "棉衣";
+                recyclething.text = "鳳梨罐頭";
                 break;
             case 32:
-                recyclething.text = "棉褲";
+                recyclething.text = "靖魚罐頭";
                 break;
             case 33:
-                recyclething.text = "毛衣";
+                recyclething.text = "肉鬆罐頭";
                 break;
             case 34:
                 recyclething.text = "鹼性電池";
@@ -326,8 +326,9 @@ public class recyclelisttext : MonoBehaviour
                 recyclething.text = "木製音箱";
                 break;
         }
-
-        if(GameDataManager.Instance.NowTaskData.Mode < 2)
+        recyclelist Recyclelist = FindObjectOfType<recyclelist>();
+        Recyclelist.timecosttext(recyclething.text);
+        if (GameDataManager.Instance.NowTaskData.Mode < 2)
         {
             recyclething.text = '.' + recyclething.text;
             recyclething.text = number + recyclething.text;
