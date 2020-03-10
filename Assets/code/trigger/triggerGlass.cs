@@ -18,7 +18,7 @@ public class triggerGlass : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Cube")
+        if (other.gameObject.name[5] == '.')
         {
             recyclelist Recyclelist = FindObjectOfType<recyclelist>();
             if (other.gameObject.tag == "玻璃類")

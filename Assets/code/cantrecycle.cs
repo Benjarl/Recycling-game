@@ -21,7 +21,7 @@ public class cantrecycle : MonoBehaviour
         recyclelist Recyclelist = FindObjectOfType<recyclelist>();
         if (recyclelist.day == 3 || recyclelist.day == 7)
         {
-            if (GameObject.Find("Cube").tag != "不可回收")
+            if (GameObject.Find("Trash."+ recyclelist.number).tag != "不可回收")
             {
                 AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
                 ansPoint.addpoint();
@@ -32,7 +32,7 @@ public class cantrecycle : MonoBehaviour
             }
         }
 
-        else if(GameObject.Find("Cube").tag == "紙類")
+        else if(GameObject.Find("Trash." + recyclelist.number).tag == "紙類")
         {
             if (recyclelist.day == 2 || recyclelist.day == 4 || recyclelist.day == 6)
             {
@@ -45,7 +45,7 @@ public class cantrecycle : MonoBehaviour
             }
         }
 
-        else if(GameObject.Find("Cube").tag == "紙容器" || GameObject.Find("Cube").tag == "塑膠類" || GameObject.Find("Cube").tag == "玻璃類" || GameObject.Find("Cube").tag == "鐵鋁罐" || GameObject.Find("Cube").tag == "保麗龍" || GameObject.Find("Cube").tag == "電器類")
+        else if(GameObject.Find("Trash." + recyclelist.number).tag == "紙容器" || GameObject.Find("Trash." + recyclelist.number).tag == "塑膠類" || GameObject.Find("Trash." + recyclelist.number).tag == "玻璃類" || GameObject.Find("Trash." + recyclelist.number).tag == "鐵鋁罐" || GameObject.Find("Trash." + recyclelist.number).tag == "保麗龍" || GameObject.Find("Trash." + recyclelist.number).tag == "電器類")
         {
             if(recyclelist.day == 1 || recyclelist.day ==5)
             {

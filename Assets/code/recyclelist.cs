@@ -20,7 +20,6 @@ public class recyclelist : MonoBehaviour
     public int timed = 10;
     public GameObject GamePanel;
     public GameObject EndPanel;
-    public GameObject Trash;
     public Image TrashOne;
     public Image TrashTwo;
     public Text Timelefttext;
@@ -77,7 +76,6 @@ public class recyclelist : MonoBehaviour
         TimedttextO.SetActive(true);
         GamePanel.SetActive(false);
         EndPanel.SetActive(false);
-        Trash.SetActive(false);
     }
 
     void timer()
@@ -90,7 +88,6 @@ public class recyclelist : MonoBehaviour
             CancelInvoke("timer");
             TimedttextO.SetActive(false);
             GamePanel.SetActive(true);
-            Trash.SetActive(true);
             changenum();
             if(GameDataManager.Instance.NowTaskData.Mode > 0)
             {
@@ -137,6 +134,7 @@ public class recyclelist : MonoBehaviour
             Recyclelisttext.recycletext(number);
             Recyclelisttext.recycleday(day);
             changetag(number);
+            GameObject.Find("Trash."+number).transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
             InvokeRepeating("timecost", 1, 1);
         }
     }
@@ -165,7 +163,6 @@ public class recyclelist : MonoBehaviour
         Rightans.text = ansPoint.point + "/" + tasknum;
         GamePanel.SetActive(false);
         EndPanel.SetActive(true);
-        Trash.SetActive(false);
 
         //存檔
         var Data = new UserData(UserName.text, Level.text, Mode.text, Rightans.text, Wrongans.text, TimeAns.text);
@@ -183,69 +180,59 @@ public class recyclelist : MonoBehaviour
 
         if (1 <= number && number <= 9)
         {
-            GameObject.Find("Cube").tag = "紙類";
             TrashOne.color = new Color32(0, 255, 0, 225);
         }
 
         else if (10 <= number && number <= 12)
         {
-            GameObject.Find("Cube").tag = "紙容器類";
             TrashOne.color = new Color32(0, 0, 255, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (13 <= number && number <= 20)
         {
-            GameObject.Find("Cube").tag = "塑膠類";
             TrashOne.color = new Color32(0, 0, 255, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (21 <= number && number <= 28)
         {
-            GameObject.Find("Cube").tag = "玻璃類";
             TrashOne.color = new Color32(0, 0, 255, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (29 <= number && number <= 33)
         {
-            GameObject.Find("Cube").tag = "鐵鋁罐類";
             TrashOne.color = new Color32(0, 0, 255, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (34 <= number && number <= 41)
         {
-            GameObject.Find("Cube").tag = "電池類";
             TrashOne.color = new Color32(0, 255, 0, 225);
             TrashTwo.color = new Color32(0, 0, 255, 225);
         }
 
         else if (42 <= number && number <= 43)
         {
-            GameObject.Find("Cube").tag = "保麗龍類";
             TrashOne.color = new Color32(0, 0, 255, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (44 <= number && number <= 54)
         {
-            GameObject.Find("Cube").tag = "電器類";
             TrashOne.color = new Color32(0, 0, 255, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
 
         else if (55 <= number && number <= 59)
         {
-            GameObject.Find("Cube").tag = "燈光類";
             TrashOne.color = new Color32(0, 225, 0, 225);
             TrashTwo.color = new Color32(0, 0, 255, 225);
         }
 
         else
         {
-            GameObject.Find("Cube").tag = "不可回收";
             TrashOne.color = new Color32(0, 0, 0, 225);
             TrashTwo.color = new Color32(0, 0, 255, 0);
         }
@@ -258,7 +245,7 @@ public class recyclelist : MonoBehaviour
     //重製位置 重製答題時間
     public void reposition()
     {
-        Trash.transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
+        GameObject.Find("Trash." + number).transform.position = Plaform.transform.position + new Vector3(-2f, 0.1f, 0f);
         CancelInvoke("timecost");
         TimeAns.text = TimeAns.text + timewaste + '秒' + '\n';
         timewaste = 0;
