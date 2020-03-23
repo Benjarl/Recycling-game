@@ -1,29 +1,34 @@
 ﻿using GameData;
 using LabData;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(GameSceneResources))]
-public class GameSceneManager : MonoSingleton<GameSceneManager>,IGameManager
+public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
 {
     private AsyncOperation _operation;
 
     public Scene CurrentScene { get; private set; }
 
-    public GameSceneResources GameSceneResources { get; private set; }
+    int IGameManager.Weight => GobalData.GameSceneManagerWeight;
 
-    public void ChangeScene(List<Action> actions,string sceneName=null)
+
+    /// <summary>
+    /// 加载场景传入Action为加载完成后需要执行的Func
+    /// </summary>
+    /// <param name="actions"></param>
+    /// <param name="sceneName"></param>
+    public void ChangeScene(List<Action> actions, string sceneName = null, LoadSceneMode mode = LoadSceneMode.Single)
     {
         //场景名
-        
         _operation = null;
-        _operation = SceneManager.LoadSceneAsync(sceneName);
+        _operation = SceneManager.LoadSceneAsync(sceneName, mode);
         _operation.completed += (AsyncOperation obj) =>
         {
             OnSceneChangeCompleted();
-            actions.ForEach(p => p.Invoke());
+            actions?.ForEach(p => p.Invoke());
         };
         _operation.allowSceneActivation = true;
     }
@@ -35,37 +40,57 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>,IGameManager
     private void OnSceneChangeCompleted()
     {
         CurrentScene = SceneManager.GetActiveScene();
-        GameSceneResources = GetComponent<GameSceneResources>();
+        Debug.Log(CurrentScene);
     }
 
-    
     /// <summary>
-    /// 加载UI场景
+    /// 跳转到UI场景
     /// </summary>
-    /// <param name="sceneName"></param>
-    //private void ChangeSceneToMainUi(string sceneName)
-    //{
-    //    _operation = null;
-    //    _operation = SceneManager.LoadSceneAsync(sceneName);
-    //    //场景加载完后做什么
-    //    _operation.completed += (AsyncOperation obj) =>
-    //    {
-    //       // TODO 加载完场景后做什么，UI做的事儿
-    //    };
-    //    _operation.allowSceneActivation = true;
-    //}
-    
-    public void ManagerInit()
+    public void Change2MainUI()
     {
-        //切换到主UI场景
         ChangeScene(new List<Action>()
         {
             GameUIManager.Instance.StartMainUiLogic
-        },GobalData.MainUiScene);
+            //TODO 转场UI需要做的事情
+        }, GobalData.MainUiScene);
     }
 
-    public void ManagerDispose()
+    /// <summary>
+    /// 跳转到主场景
+    /// </summary>
+    public void Change2MainScene()
+    {
+        if (GameApplication.IsVR)
+        {
+            ChangeScene(new List<Action>()
+            {
+                GameUIManager.Instance.StartMainUiLogic,
+                GameEntityManager.Instance.SetSceneEntity,
+                GameTaskManager.Instance.StartGameTask,
+            
+                //TODO 转场出场景需要做的事情
+            }, GobalData.MainScene+"_VR");
+        }
+        else
+        {
+            ChangeScene(new List<Action>()
+            {
+                GameUIManager.Instance.StartMainUiLogic,
+                GameEntityManager.Instance.SetSceneEntity,
+                GameTaskManager.Instance.StartGameTask,
+            
+                //TODO 转场出场景需要做的事情
+            }, GobalData.MainScene);
+        }
+    }
+
+    void IGameManager.ManagerInit()
     {
         
+    }
+
+    IEnumerator IGameManager.ManagerDispose()
+    {
+        yield return null;
     }
 }

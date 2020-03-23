@@ -16,9 +16,9 @@ public class LabDataConfig
 
     public LabDataConfig()
     {
-        ServerPath = "http://120.132.106.14:4000/api/data";
-        SendToServer = true;
+        ServerPath = "http://syncdata.xrrehab.net/api/data";
+        SendToServer = false;
         LocalSaveDataTimeLayout = "yyyyMMddHH";
-        ProjectId = "Null";
+        ProjectId = "FingerMatch_M";
     }
 }

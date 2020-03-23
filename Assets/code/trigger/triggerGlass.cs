@@ -2,47 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class triggerGlass : MonoBehaviour
+namespace TestGameFrame
 {
-    // Start is called before the first frame update
-    void Start()
+    public class triggerGlass : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name[5] == '.')
+        // Start is called before the first frame update
+        void Start()
         {
-            recyclelist Recyclelist = FindObjectOfType<recyclelist>();
-            if (other.gameObject.tag == "玻璃類")
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.name[5] == '.')
             {
-                if (recyclelist.day == 2 || recyclelist.day == 4 || recyclelist.day == 6)
+                if (other.gameObject.tag == "玻璃類")
                 {
-                    AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
-                    ansPoint.addpoint();
+                    if (recyclelist.day == 2 || recyclelist.day == 4 || recyclelist.day == 6)
+                    {
+                        GameEventCenter.DispatchEvent("addpoint");
+                    }
+                    else
+                    {
+                        GameEventCenter.DispatchEvent("wrong");
+                    }
                 }
                 else
                 {
-                    Recyclelist.wrong();
+                    GameEventCenter.DispatchEvent("wrong");
                 }
+                GameEventCenter.DispatchEvent("reposition");
+                GameEventCenter.DispatchEvent("changenum");
+                other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
-            else
-            {
-                Recyclelist.wrong();
-            }
-            Recyclelist.reposition();
-            Recyclelist.changenum();
-            
-            other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-        }
 
-        
+
+        }
     }
 }

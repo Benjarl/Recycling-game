@@ -3,46 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class triggerPapper : MonoBehaviour
+namespace TestGameFrame
 {
-    // Start is called before the first frame update
-    void Start()
+    public class triggerPapper : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name[5] == '.')
+        // Start is called before the first frame update
+        void Start()
         {
-            recyclelist Recyclelist = FindObjectOfType<recyclelist>();
-            if(other.gameObject.tag == "紙類")
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.name[5] == '.')
             {
-                if (recyclelist.day == 1 || recyclelist.day == 5)
+                if (other.gameObject.tag == "紙類")
                 {
-                    AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
-                    ansPoint.addpoint();
+                    if (recyclelist.day == 1 || recyclelist.day == 5)
+                    {
+                        GameEventCenter.DispatchEvent("addpoint");
+                    }
+                    else
+                    {
+                        GameEventCenter.DispatchEvent("wrong");
+                    }
                 }
                 else
                 {
-                    Recyclelist.wrong();
+                    GameEventCenter.DispatchEvent("wrong");
                 }
+                GameEventCenter.DispatchEvent("reposition");
+                GameEventCenter.DispatchEvent("changenum");
+                other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
-            else
-            {
-                Recyclelist.wrong();
-            }
-            Recyclelist.reposition();
-            Recyclelist.changenum();
-            
-            other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+
         }
-            
     }
 }

@@ -54,6 +54,8 @@ namespace LabData
             _timer.Elapsed += timer_Tick;
             _timer.Start();
         }
+
+ 
         /// <summary>
         /// 写入一次
         /// </summary>

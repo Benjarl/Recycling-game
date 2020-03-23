@@ -1,0 +1,95 @@
+2020-03-10T21:51:40.0356533+08:00|1|INFO|DataSync.Log|Storage folder: C:\Users\User\Desktop\New Unity Project\Assets\TestData\TestStore successfully validated. 
+2020-03-10T21:51:40.0796407+08:00|40|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-10T21:51:40.1466169+08:00|40|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-10T21:51:40.2125958+08:00|40|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-10T21:51:40.2755743+08:00|40|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-10T21:52:10.0988177+08:00|39|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-10T21:52:10.1977874+08:00|39|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 0356cde722d747fe801d9ca8f5b9a05c(0-0). 
+2020-03-10T21:52:10.1977874+08:00|39|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 0356cde722d747fe801d9ca8f5b9a05c(0-0). 
+2020-03-10T21:52:10.3447387+08:00|36|INFO|DataSync.Log|TransmissionSent. TransmissionId: 0356cde722d747fe801d9ca8f5b9a05c(0-0). Capacity: 0. 
+2020-03-22T01:01:20.7805284+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-22T01:01:21.1894520+08:00|177|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-22T01:01:21.2502891+08:00|177|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-22T01:01:21.3101298+08:00|177|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-22T01:01:21.3729612+08:00|177|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-22T01:01:51.2175045+08:00|186|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-22T01:01:51.3522753+08:00|186|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 262a87feedb94f419b9f5a5f812a5862(0-0). 
+2020-03-22T01:01:51.3673380+08:00|186|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 262a87feedb94f419b9f5a5f812a5862(0-0). 
+2020-03-22T01:01:51.6225867+08:00|175|INFO|DataSync.Log|TransmissionSent. TransmissionId: 262a87feedb94f419b9f5a5f812a5862(0-0). Capacity: 0. 
+2020-03-24T00:00:06.5067117+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T00:00:06.5610784+08:00|31|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T00:00:06.6254203+08:00|31|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T00:00:06.6842632+08:00|31|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T00:00:06.7431045+08:00|31|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T00:00:36.5837490+08:00|31|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T00:00:36.7393334+08:00|31|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: abd6512229ad432b9f88978435b0a70d(0-0). 
+2020-03-24T00:00:36.7493066+08:00|31|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: abd6512229ad432b9f88978435b0a70d(0-0). 
+2020-03-24T00:00:36.9916583+08:00|32|INFO|DataSync.Log|TransmissionSent. TransmissionId: abd6512229ad432b9f88978435b0a70d(0-0). Capacity: 0. 
+2020-03-24T00:02:52.7622385+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T00:02:52.7991413+08:00|9|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T00:02:52.8629705+08:00|9|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T00:02:52.9248046+08:00|9|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T00:02:52.9846448+08:00|9|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T00:03:22.8181332+08:00|11|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T00:03:22.9787023+08:00|11|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 4895390f7f0b4ee6a35220fd8ab37c28(0-0). 
+2020-03-24T00:03:23.0016420+08:00|11|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 4895390f7f0b4ee6a35220fd8ab37c28(0-0). 
+2020-03-24T00:03:23.2419994+08:00|31|INFO|DataSync.Log|TransmissionSent. TransmissionId: 4895390f7f0b4ee6a35220fd8ab37c28(0-0). Capacity: 0. 
+2020-03-24T00:04:34.3764382+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T00:04:34.4128499+08:00|32|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T00:04:34.4746906+08:00|32|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T00:04:34.5509951+08:00|32|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T00:04:34.6153322+08:00|32|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T00:05:04.4311122+08:00|11|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T00:05:04.5567770+08:00|11|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: e0fe8bf91c714509907c35456de0752d(0-0). 
+2020-03-24T00:05:04.5787178+08:00|11|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: e0fe8bf91c714509907c35456de0752d(0-0). 
+2020-03-24T00:05:04.7761897+08:00|9|INFO|DataSync.Log|TransmissionSent. TransmissionId: e0fe8bf91c714509907c35456de0752d(0-0). Capacity: 0. 
+2020-03-24T00:11:01.5485816+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T00:11:01.5914648+08:00|12|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T00:11:01.6572895+08:00|12|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T00:11:01.7241094+08:00|12|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T00:11:01.7859447+08:00|12|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T00:11:31.6111740+08:00|9|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T00:11:31.6889651+08:00|9|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 3f1a46bbaf7a4376aa1415fbd7dee8af(0-0). 
+2020-03-24T00:11:31.7109072+08:00|9|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 3f1a46bbaf7a4376aa1415fbd7dee8af(0-0). 
+2020-03-24T00:11:31.9253748+08:00|30|INFO|DataSync.Log|TransmissionSent. TransmissionId: 3f1a46bbaf7a4376aa1415fbd7dee8af(0-0). Capacity: 0. 
+2020-03-24T00:20:11.3720013+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T00:20:11.4188767+08:00|11|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T00:20:11.4817105+08:00|11|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T00:20:11.5405515+08:00|11|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T00:20:11.5993937+08:00|11|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T00:20:41.4401797+08:00|13|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T00:20:41.5289434+08:00|13|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: c88e0c5febd6403da90fea451a31235b(0-0). 
+2020-03-24T00:20:41.5478913+08:00|13|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: c88e0c5febd6403da90fea451a31235b(0-0). 
+2020-03-24T00:20:41.7812605+08:00|32|INFO|DataSync.Log|TransmissionSent. TransmissionId: c88e0c5febd6403da90fea451a31235b(0-0). Capacity: 0. 
+2020-03-24T00:22:38.0708894+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T00:22:38.1112954+08:00|32|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T00:22:38.1771191+08:00|32|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T00:22:38.2354748+08:00|32|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T00:22:38.2943170+08:00|32|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T00:23:08.1301141+08:00|12|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T00:23:08.2039173+08:00|12|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: b1e02755cea347cbac51958d3a57cef9(0-0). 
+2020-03-24T00:23:08.2248611+08:00|12|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: b1e02755cea347cbac51958d3a57cef9(0-0). 
+2020-03-24T00:23:08.4293149+08:00|31|INFO|DataSync.Log|TransmissionSent. TransmissionId: b1e02755cea347cbac51958d3a57cef9(0-0). Capacity: 0. 
+2020-03-24T05:42:05.2406327+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T05:42:05.3044626+08:00|66|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T05:42:05.3692942+08:00|66|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T05:42:05.4371090+08:00|66|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T05:42:05.5089146+08:00|66|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T05:42:35.3258431+08:00|67|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T05:42:35.6191217+08:00|67|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 2d53547899524a729fadd5f4342d6a8c(0-0). 
+2020-03-24T05:42:35.6450521+08:00|67|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 2d53547899524a729fadd5f4342d6a8c(0-0). 
+2020-03-24T05:42:35.9268896+08:00|67|INFO|DataSync.Log|TransmissionSent. TransmissionId: 2d53547899524a729fadd5f4342d6a8c(0-0). Capacity: 0. 
+2020-03-24T05:44:59.4745256+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T05:44:59.5199500+08:00|77|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T05:44:59.5827825+08:00|77|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T05:44:59.6411345+08:00|77|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T05:44:59.6999772+08:00|77|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-03-24T05:45:29.5364322+08:00|67|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-03-24T05:45:29.6441439+08:00|67|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 93fb72616ab2415681c604a8d12a3d19(0-0). 
+2020-03-24T05:45:29.6561122+08:00|67|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 93fb72616ab2415681c604a8d12a3d19(0-0). 
+2020-03-24T05:45:29.8266563+08:00|67|INFO|DataSync.Log|TransmissionSent. TransmissionId: 93fb72616ab2415681c604a8d12a3d19(0-0). Capacity: 0. 
+2020-03-24T05:46:33.4690126+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-03-24T05:46:33.5089053+08:00|79|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-03-24T05:46:33.5737322+08:00|79|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-03-24T05:46:33.6355659+08:00|79|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-03-24T05:46:33.6983984+08:00|79|INFO|DataSync.Log|MovedFromBufferToSender. 

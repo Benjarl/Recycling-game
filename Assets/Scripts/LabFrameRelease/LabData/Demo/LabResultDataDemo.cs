@@ -5,20 +5,20 @@ using DataSync;
 using LabData;
 using UnityEngine;
 
-public class LabResultDataDemo : MonoBehaviour, IData
+public class LabResultDataDemo : MonoBehaviour
 {
-    public List<Func<LabDataBase>> SaveDataList => new List<Func<LabDataBase>>()
-    {
-       ()=>new LabResultDemoData("testResultTest01", "testResultTest02"),
-       ()=>new LabResultDemoData1("testResultTest04", "testResultTest03")
-    };
-
 
     void Start()
     {
-        LabDataManager.Instance.DataCollect(this, false);
+        StartCoroutine(DataCollectTest());
     }
 
+    IEnumerator DataCollectTest()
+    {
+        yield return new WaitForSeconds(1f);
+        LabDataTestComponent.LabDataManager.SendData(new LabResultDemoData("testResultTest01", "testResultTest02"));
+        LabDataTestComponent.LabDataManager.SendData(new LabResultDemoData1("testResultTest04", "testResultTest03"));
+    }
 
-
+   
 }

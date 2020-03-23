@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LabData;
+using GameData;
+
 
 public class GameUIManager : MonoSingleton<GameUIManager>, IGameManager
 {
+    int IGameManager.Weight => GobalData.GameUIManagerWeight;
+
+    IEnumerator IGameManager.ManagerDispose()
+    {
+        yield return null;
+    }
+
+    void IGameManager.ManagerInit()
+    {
+       
+    }
+
+    public void BindEvent()
+    {
+    }
+
     public void StartMainUiLogic()
     {
-        MainUI mainUI = FindObjectOfType<MainUI>();
-        mainUI.StartUI();
-    }
-
-    public void StartGameUiLogic()
-    {
-        recyclelist Recyclelist = FindObjectOfType<recyclelist>();
-        Recyclelist.timede();
-    }
-
-    public void ManagerInit()
-    {
-    }
-
-    public void ManagerDispose()
-    {
-
+        
     }
 }
+

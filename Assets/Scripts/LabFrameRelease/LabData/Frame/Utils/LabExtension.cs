@@ -14,11 +14,21 @@ namespace LabData
         {
             return JsonConvert.SerializeObject(o, new JsonSerializerSettings()
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                NullValueHandling = NullValueHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                NullValueHandling = NullValueHandling.Include
                 
             });           
         }
+        ///// <summary>
+        ///// 获取这个Key的翻译内容
+        ///// </summary>
+        ///// <param name="o"></param>
+        ///// <returns></returns>
+        //public static string GetTranslation(this string o)
+        //{
+        //    var translate = LocalizationManager.GetTranslation(o);
+        //    return string.IsNullOrEmpty(translate) ? o : translate;
+        //}
 
         public static string ToCsv(this object o)
         {

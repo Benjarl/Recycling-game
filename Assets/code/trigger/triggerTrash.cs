@@ -2,39 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class triggerTrash : MonoBehaviour
+namespace TestGameFrame
 {
-    // Start is called before the first frame update
-    void Start()
+    public class triggerTrash : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name[5] == '.')
+        // Start is called before the first frame update
+        void Start()
         {
-            recyclelist Recyclelist = FindObjectOfType<recyclelist>();
-            if (other.gameObject.tag == "不可回收")
-            {
-                AnsPoint ansPoint = FindObjectOfType<AnsPoint>();
-                ansPoint.addpoint();
-            }
-            else
-            {
-                Recyclelist.wrong();
-            }
-            Recyclelist.reposition();
-            Recyclelist.changenum();
-            
-            other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+
         }
-        
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.name[5] == '.')
+            {
+                recyclelist Recyclelist = FindObjectOfType<recyclelist>();
+                if (other.gameObject.tag == "不可回收")
+                {
+                    GameEventCenter.DispatchEvent("addpoint");
+                }
+                else
+                {
+                    GameEventCenter.DispatchEvent("wrong");
+                }
+                GameEventCenter.DispatchEvent("reposition");
+                GameEventCenter.DispatchEvent("changenum");
+                other.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            }
+
+        }
     }
 }

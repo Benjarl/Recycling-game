@@ -9,12 +9,7 @@ using System.IO;
 
 public class MainUI : MonoBehaviour
 {
-    public RemindType UI_RemindType = RemindType.TextVoice;
-
-    public Language UI_Language = Language.English;
-
     public string UI_UserID;
-
 
     public static string startpath;
 
@@ -83,22 +78,22 @@ public class MainUI : MonoBehaviour
     public GameObject TrashPanel;
 
     //MainUI
-    public void StartUI()
+    public void Start()
     {
         //clean dropdown
         Level.ClearOptions();
 
         //必须先创建对应数据的文件夹
-        LabTools.CreateDataFolder<TaskData>();
+        LabTools.CreateDataFolder<GameFlowData>();
 
-        if (LabTools.GetDataName<TaskData>() != null)
+        if (LabTools.GetDataName<GameFlowData>() != null)
         {
             //選關卡名稱
             List<string> one = new List<string>();
-            one = LabTools.GetDataName<TaskData>();
+            one = LabTools.GetDataName<GameFlowData>();
             for (int i = 0; i < one.Count; i++)
             {
-                var two = LabTools.GetData<TaskData>(one[i]);
+                var two = LabTools.GetData<GameFlowData>(one[i]);
                 Level.options.Add(new Dropdown.OptionData() { text = two.LevelName });
             }
         }
@@ -112,19 +107,22 @@ public class MainUI : MonoBehaviour
         NextBotton.onClick.AddListener(delegate
         {
             UI_UserID = InputUserName.text;
-            GameApplication.Instance.StartGameFlow(new GameFlowData(UI_RemindType, UI_Language, UI_UserID));
+            GameFlowData gameFlow = new GameFlowData();
             //搜尋對應現有的任務
             List<string> temp = new List<string>();
-            temp = LabTools.GetDataName<TaskData>();
+            temp = LabTools.GetDataName<GameFlowData>();
             for (int i = 0; i < temp.Count; i++)
             {
-                var tempData = LabTools.GetData<TaskData>(temp[i]);
+                var tempData = LabTools.GetData<GameFlowData>(temp[i]);
                 if (tempData.LevelName == Level.captionText.text)
                 {
-                    GameDataManager.Instance.NowTaskData = tempData;
+                    gameFlow = tempData;
                     break;
                 }
             }
+            GameDataManager.FlowData = gameFlow;
+            GameDataManager.LabDataManager.LabDataCollectInit(() => UI_UserID);
+            GameSceneManager.Instance.Change2MainScene();
         });
 
         Leave.onClick.AddListener(delegate
@@ -145,14 +143,14 @@ public class MainUI : MonoBehaviour
     {
         LevelDropdown.ClearOptions();
 
-        if (LabTools.GetDataName<TaskData>() != null)
+        if (LabTools.GetDataName<GameFlowData>() != null)
         {
             //選關卡名稱
             List<string> one = new List<string>();
-            one = LabTools.GetDataName<TaskData>();
+            one = LabTools.GetDataName<GameFlowData>();
             for (int i = 0; i < one.Count; i++)
             {
-                var two = LabTools.GetData<TaskData>(one[i]);
+                var two = LabTools.GetData<GameFlowData>(one[i]);
                 LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.LevelName });
             }
         }
@@ -181,36 +179,36 @@ public class MainUI : MonoBehaviour
         //刪除
         DeleteLevelButton.onClick.AddListener(delegate
         {
-            string path = Application.dataPath + "/GameData/" + "/TaskData/" + LevelDropdown.captionText.text + ".json";
+            string path = Application.dataPath + "/GameData/" + "/GameFlowData/" + LevelDropdown.captionText.text + ".json";
             if (File.Exists(path))
                 File.Delete(path);
-            path = Application.dataPath + "/GameData/" + "/TaskData/" + LevelDropdown.captionText.text + ".json.meta";
+            path = Application.dataPath + "/GameData/" + "/GameFlowData/" + LevelDropdown.captionText.text + ".json.meta";
             if (File.Exists(path))
                 File.Delete(path);
 
             Level.ClearOptions();
             LevelDropdown.ClearOptions();
 
-            if (LabTools.GetDataName<TaskData>() != null)
+            if (LabTools.GetDataName<GameFlowData>() != null)
             {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskData>();
+                one = LabTools.GetDataName<GameFlowData>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<TaskData>(one[i]);
+                    var two = LabTools.GetData<GameFlowData>(one[i]);
                     LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.LevelName });
                 }
             }
 
-            if (LabTools.GetDataName<TaskData>() != null)
+            if (LabTools.GetDataName<GameFlowData>() != null)
             {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskData>();
+                one = LabTools.GetDataName<GameFlowData>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<TaskData>(one[i]);
+                    var two = LabTools.GetData<GameFlowData>(one[i]);
                     Level.options.Add(new Dropdown.OptionData() { text = two.LevelName });
                 }
             }
@@ -241,10 +239,10 @@ public class MainUI : MonoBehaviour
             if (ModeDropdown.value == 0)
                 TimeInputField.text = "0";
 
-            var Data = new TaskData(LevelNameInput.text, ModeDropdown.value, Convert.ToInt32(TimeInputField.text), (TrashNumber.text + " "));
+            var Data = new GameFlowData(LevelNameInput.text, ModeDropdown.value, Convert.ToInt32(TimeInputField.text), (TrashNumber.text + " "));
 
             if (set == "New")
-                LabTools.WriteData(Data, LevelNameInput.text);
+                LabTools.WriteData(Data, LevelNameInput.text, true);
 
             else if (set == "Change")
                 LabTools.WriteData(Data, LevelNameInput.text, true);
@@ -252,26 +250,26 @@ public class MainUI : MonoBehaviour
             Level.ClearOptions();
             LevelDropdown.ClearOptions();
 
-            if (LabTools.GetDataName<TaskData>() != null)
+            if (LabTools.GetDataName<GameFlowData>() != null)
             {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskData>();
+                one = LabTools.GetDataName<GameFlowData>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<TaskData>(one[i]);
+                    var two = LabTools.GetData<GameFlowData>(one[i]);
                     LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.LevelName });
                 }
             }
 
-            if (LabTools.GetDataName<TaskData>() != null)
+            if (LabTools.GetDataName<GameFlowData>() != null)
             {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskData>();
+                one = LabTools.GetDataName<GameFlowData>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<TaskData>(one[i]);
+                    var two = LabTools.GetData<GameFlowData>(one[i]);
                     Level.options.Add(new Dropdown.OptionData() { text = two.LevelName });
                 }
             }
@@ -317,10 +315,10 @@ public class MainUI : MonoBehaviour
         CreateTitle.text = "編輯關卡";
         //讀取現有關卡
         List<string> temp = new List<string>();
-        temp = LabTools.GetDataName<TaskData>();
+        temp = LabTools.GetDataName<GameFlowData>();
         for (int i = 0; i < temp.Count; i++)
         {
-            var Data = LabTools.GetData<TaskData>(temp[i]);
+            var Data = LabTools.GetData<GameFlowData>(temp[i]);
             if (Data.LevelName == LevelDropdown.captionText.text)
             {
                 LevelNameInput.text = Data.LevelName;
@@ -362,3 +360,4 @@ public class MainUI : MonoBehaviour
         });
     }
 }
+

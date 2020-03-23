@@ -1,5 +1,8 @@
-﻿public interface IGameManager
+﻿using System.Collections;
+
+public interface IGameManager
 {
+    int Weight { get; }
     void ManagerInit();
-    void ManagerDispose();
+    IEnumerator ManagerDispose();
 }
