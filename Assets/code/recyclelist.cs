@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameData;
@@ -34,6 +35,7 @@ namespace TestGameFrame
         public AudioSource startaudio;
         public GameObject Plaform;
         public GameObject Allobject;
+        public GameObject PositionCheck;
         public Text TimeAns;
         public int timewaste = 0;
         public int trashnum = 0;
@@ -71,7 +73,6 @@ namespace TestGameFrame
                 Mode.text = "提示";
             else if (GameDataManager.FlowData.Mode == 2)
                 Mode.text = "挑戰";
-            //Allobject.transform.position = SteamVR_Render.Top().head.position + new Vector3(0f, 0f, 0.68f);
             //開始倒數
             timed = 10;
             InvokeRepeating("timer", 1, 1);
@@ -98,6 +99,7 @@ namespace TestGameFrame
 
         void timer()
         {
+            Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
             timed--;
             Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 
