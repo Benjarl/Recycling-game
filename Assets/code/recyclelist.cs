@@ -16,9 +16,9 @@ namespace TestGameFrame
         public static int number = 0;
         public static int day = 1;
         //垃圾編號
-        string trashnumber = GameDataManager.FlowData.Trashnumber;
+        string trashnumber = GameDataManager.TaskData.Trashnumber;
         //需要時間
-        int TotalTime = GameDataManager.FlowData.Time;
+        int TotalTime = GameDataManager.TaskData.Time;
         public static int i = 0;
         public Text Timedetext;
         public GameObject TimedttextO;
@@ -66,12 +66,12 @@ namespace TestGameFrame
                     tasknum++;
             }
             UserName.text = GameDataManager.FlowData.UserId;
-            Level.text = GameDataManager.FlowData.LevelName;
-            if (GameDataManager.FlowData.Mode == 0)
+            Level.text = GameDataManager.TaskData.LevelName;
+            if (GameDataManager.TaskData.Mode == 0)
                 Mode.text = "新手";
-            else if (GameDataManager.FlowData.Mode == 1)
+            else if (GameDataManager.TaskData.Mode == 1)
                 Mode.text = "提示";
-            else if (GameDataManager.FlowData.Mode == 2)
+            else if (GameDataManager.TaskData.Mode == 2)
                 Mode.text = "挑戰";
             //開始倒數
             timed = 10;
@@ -99,7 +99,7 @@ namespace TestGameFrame
 
         void timer()
         {
-            Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
+            //Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
             timed--;
             Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 
@@ -109,7 +109,7 @@ namespace TestGameFrame
                 TimedttextO.SetActive(false);
                 GamePanel.SetActive(true);
                 changenum();
-                if (GameDataManager.FlowData.Mode > 0)
+                if (GameDataManager.TaskData.Mode > 0)
                 {
                     TimelefttextO.SetActive(true);
                     InvokeRepeating("timeleft", 1, 1);
@@ -250,7 +250,7 @@ namespace TestGameFrame
                 TrashOne.color = new Color32(0, 0, 0, 225);
                 TrashTwo.color = new Color32(0, 0, 255, 0);
             }
-            if (GameDataManager.FlowData.Mode > 0)
+            if (GameDataManager.TaskData.Mode > 0)
             {
                 TrashOne.color = new Color32(0, 225, 0, 0);
                 TrashTwo.color = new Color32(0, 0, 255, 0);

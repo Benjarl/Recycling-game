@@ -60,7 +60,7 @@ namespace TestGameFrame
                     Day.color = new Color32(255, 0, 0, 225);
                     break;
             }
-            if (GameDataManager.FlowData.Mode > 1)
+            if (GameDataManager.TaskData.Mode > 1)
             {
                 Day.color = new Color32(255, 0, 0, 0);
             }
@@ -329,7 +329,7 @@ namespace TestGameFrame
                     break;
             }
             GameEventCenter.DispatchEvent("timecosttext");
-            if (GameDataManager.FlowData.Mode < 2)
+            if (GameDataManager.TaskData.Mode < 2)
             {
                 recyclething.text = '.' + recyclething.text;
                 recyclething.text = number + recyclething.text;

@@ -4,7 +4,7 @@ using UnityEngine;
 using LabData;
 using DataSync;
 
-namespace TestGameFrame
+namespace GameData
 {
     public class TaskConfig : LabDataBase
     {
@@ -19,6 +19,11 @@ namespace TestGameFrame
             Mode = mode;
             Time = time;
             Trashnumber = trashnumber;
+        }
+
+        public TaskConfig()
+        {
+           
         }
 
     }
