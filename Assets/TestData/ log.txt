@@ -147,3 +147,12 @@
 2020-04-06T16:10:20.9385934+08:00|9|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: bdea0c2e77b54578870835b1fb44fbc3(0-0). 
 2020-04-06T16:10:21.0612653+08:00|9|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: bdea0c2e77b54578870835b1fb44fbc3(0-0). 
 2020-04-06T16:10:21.2876608+08:00|9|INFO|DataSync.Log|TransmissionSent. TransmissionId: bdea0c2e77b54578870835b1fb44fbc3(0-0). Capacity: 0. 
+2020-04-07T04:07:26.0921772+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-04-07T04:07:26.2428172+08:00|49|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-04-07T04:07:26.3106376+08:00|49|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-04-07T04:07:26.3704755+08:00|49|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-04-07T04:07:26.4343060+08:00|49|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-04-07T04:07:56.2606938+08:00|53|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-04-07T04:07:56.4172751+08:00|53|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 398b6f7b8a534ca5b60df1764dc403f1(0-0). 
+2020-04-07T04:07:56.4312376+08:00|53|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 398b6f7b8a534ca5b60df1764dc403f1(0-0). 
+2020-04-07T04:07:56.6553362+08:00|57|INFO|DataSync.Log|TransmissionSent. TransmissionId: 398b6f7b8a534ca5b60df1764dc403f1(0-0). Capacity: 0. 
