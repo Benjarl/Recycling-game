@@ -26,8 +26,8 @@ namespace TestGameFrame
 
         public void recycleday(int day)
         {
-            recyclething = GameObject.Find("RecycleThingText").GetComponent<Text>();
-            recycledaytext = GameObject.Find("DayText").GetComponent<Text>();
+            //recyclething = GameObject.Find("RecycleThingText").GetComponent<Text>();
+            //recycledaytext = GameObject.Find("DayText").GetComponent<Text>();
             Day = GameObject.Find("DayImage").GetComponent<Image>();
             switch (day)
             {

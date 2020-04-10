@@ -2,51 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Catch : MonoBehaviour
+namespace TestGameFrame
 {
-
-    // Start is called before the first frame update
-    void Start()
+    public class Catch : GameEntityBase
     {
-        
-    }
+        public override void EntityDispose()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        }
 
-    private Vector3 mOffset;
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    private float mZCoord;
+        }
 
-    void OnMouseDown()
+        // Update is called once per frame
+        void Update()
+        {
 
-    {
-        mZCoord = Camera.main.WorldToScreenPoint(
+        }
 
-            gameObject.transform.position).z;
+        private Vector3 mOffset;
 
-        // Store offset = gameobject world pos - mouse world pos
-        mOffset = gameObject.transform.position - GetMouseAsWorldPoint();
+        private float mZCoord;
 
-    }
+        void OnMouseDown()
 
-    private Vector3 GetMouseAsWorldPoint()
-    {
-        // Pixel coordinates of mouse (x,y)
-        Vector3 mousePoint = Input.mousePosition;
+        {
+            mZCoord = Camera.main.WorldToScreenPoint(
 
-        // z coordinate of game object on screen
-        mousePoint.z = mZCoord;
+                gameObject.transform.position).z;
 
-        // Convert it to world points
-        return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
+            // Store offset = gameobject world pos - mouse world pos
+            mOffset = gameObject.transform.position - GetMouseAsWorldPoint();
 
-    void OnMouseDrag()
-    {
-        transform.position = GetMouseAsWorldPoint() + mOffset;
+        }
+
+        private Vector3 GetMouseAsWorldPoint()
+        {
+            // Pixel coordinates of mouse (x,y)
+            Vector3 mousePoint = Input.mousePosition;
+
+            // z coordinate of game object on screen
+            mousePoint.z = mZCoord;
+
+            // Convert it to world points
+            return Camera.main.ScreenToWorldPoint(mousePoint);
+        }
+
+        void OnMouseDrag()
+        {
+            transform.position = GetMouseAsWorldPoint() + mOffset;
+        }
     }
 }

@@ -154,7 +154,7 @@ namespace TestGameFrame
                 Recyclelisttext.recycletext(number);
                 Recyclelisttext.recycleday(day);
                 changetag(number);
-                GameObject.Find("Trash." + number).transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
+                GameObject.Find("Trash." + number+"(Clone)").transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
                 InvokeRepeating("timecost", 1, 1);
             }
         }
@@ -174,7 +174,8 @@ namespace TestGameFrame
         {
             Back.onClick.AddListener(delegate
             {
-                GameSceneManager.Instance.Change2MainUI();
+                GameApplication.Instance.GameApplicationDispose();
+                Application.Quit();
             });
 
             Rightans.text = point + "/" + tasknum;
@@ -259,7 +260,7 @@ namespace TestGameFrame
         //重製位置 重製答題時間
         public void reposition()
         {
-            GameObject.Find("Trash." + number).transform.position = Plaform.transform.position + new Vector3(-2f, 0.1f, 0f);
+            GameObject.Find("Trash." + number + "(Clone)").transform.position = Plaform.transform.position + new Vector3(-2f, 0.1f, 2f);
             CancelInvoke("timecost");
             TimeAns.text = TimeAns.text + timewaste + '秒' + '\n';
             timewaste = 0;
