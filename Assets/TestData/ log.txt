@@ -377,3 +377,75 @@
 2020-04-10T20:53:59.3382021+08:00|286|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: b79637a6b3b24b3e8b5fccf8d2729b25(0-0). 
 2020-04-10T20:53:59.3551565+08:00|286|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: b79637a6b3b24b3e8b5fccf8d2729b25(0-0). 
 2020-04-10T20:53:59.3970443+08:00|286|INFO|DataSync.Log|TransmissionSent. TransmissionId: b79637a6b3b24b3e8b5fccf8d2729b25(0-0). Capacity: 0. 
+2020-05-05T03:22:22.7602877+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-05-05T03:22:22.9338308+08:00|45|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-05-05T03:22:23.0036369+08:00|45|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-05-05T03:22:23.0704578+08:00|45|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-05-05T03:22:23.1293005+08:00|45|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-05-05T03:22:52.9690580+08:00|48|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-05-05T03:22:53.0982280+08:00|48|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 327d97c259bd4c5cb5f18c8fe1acb816(0-0). 
+2020-05-05T03:22:53.1111918+08:00|48|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 327d97c259bd4c5cb5f18c8fe1acb816(0-0). 
+2020-05-05T03:22:53.3534615+08:00|48|INFO|DataSync.Log|TransmissionSent. TransmissionId: 327d97c259bd4c5cb5f18c8fe1acb816(0-0). Capacity: 0. 
+2020-05-05T03:24:07.4239116+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-05-05T03:24:07.4608125+08:00|73|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-05-05T03:24:07.5336185+08:00|73|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-05-05T03:24:07.6054261+08:00|73|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-05-05T03:24:07.6682567+08:00|73|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-05-05T03:26:11.7264746+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-05-05T03:26:11.7601946+08:00|71|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-05-05T03:26:11.8250189+08:00|71|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-05-05T03:26:11.8888467+08:00|71|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-05-05T03:26:11.9521861+08:00|71|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-05-05T03:26:37.1142680+08:00|1|INFO|DataSync.Log|Transmitter flushed telemetry events. 
+2020-05-05T03:26:37.1312225+08:00|1|INFO|DataSync.Log|SerializationStarted. Items count: 2 
+2020-05-05T03:26:37.1980430+08:00|1|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: a1783ef4ff42416a9b65113896401883(0-1). 
+2020-05-05T03:26:37.1980430+08:00|1|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: a1783ef4ff42416a9b65113896401883(0-1). 
+2020-05-05T03:26:37.2758359+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed sender capacity to 0 
+2020-05-05T03:26:37.2917930+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed buffer capacity to 0 
+2020-05-05T03:26:37.2917930+08:00|1|INFO|DataSync.Log|StorageCapacityReset: DataSync.ApplicationLifecycleTransmissionPolicy 
+2020-05-05T03:26:37.3117399+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-05-05T03:26:37.3276982+08:00|1|INFO|DataSync.Log|MovedFromBufferToStorage. 
+2020-05-05T03:26:37.3466464+08:00|1|INFO|DataSync.Log|TransmitterEmptyBuffer 
+2020-05-05T03:26:37.3616066+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-05-05T03:26:37.3845666+08:00|50|INFO|DataSync.Log|TransmissionSent. TransmissionId: a1783ef4ff42416a9b65113896401883(0-1). Capacity: 0. 
+2020-05-05T03:26:37.4005025+08:00|50|WARN|DataSync.Log|SenderEnqueueNoCapacity. TransmissionCount: 0. Capacity: 0. 
+2020-05-05T03:32:59.8016416+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-05-05T03:32:59.8385428+08:00|46|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-05-05T03:32:59.9113492+08:00|46|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-05-05T03:32:59.9781690+08:00|46|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-05-05T03:33:00.0390067+08:00|46|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-05-05T03:33:20.1251557+08:00|1|INFO|DataSync.Log|Transmitter flushed telemetry events. 
+2020-05-05T03:33:20.1421096+08:00|1|INFO|DataSync.Log|SerializationStarted. Items count: 2 
+2020-05-05T03:33:20.2169093+08:00|1|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 15f00b9a6b174aa5847368691d65b57a(0-1). 
+2020-05-05T03:33:20.2418472+08:00|1|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 15f00b9a6b174aa5847368691d65b57a(0-1). 
+2020-05-05T03:33:20.3046751+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed sender capacity to 0 
+2020-05-05T03:33:20.3146496+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed buffer capacity to 0 
+2020-05-05T03:33:20.3326005+08:00|1|INFO|DataSync.Log|StorageCapacityReset: DataSync.ApplicationLifecycleTransmissionPolicy 
+2020-05-05T03:33:20.3415773+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-05-05T03:33:20.3415773+08:00|1|INFO|DataSync.Log|MovedFromBufferToStorage. 
+2020-05-05T03:33:20.3595289+08:00|1|INFO|DataSync.Log|TransmitterEmptyBuffer 
+2020-05-05T03:33:20.3774804+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-05-05T03:33:20.3964285+08:00|72|INFO|DataSync.Log|TransmissionSent. TransmissionId: 15f00b9a6b174aa5847368691d65b57a(0-1). Capacity: 0. 
+2020-05-05T03:33:20.5340616+08:00|72|WARN|DataSync.Log|SenderEnqueueNoCapacity. TransmissionCount: 0. Capacity: 0. 
+2020-05-05T07:31:17.7871567+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-05-05T07:31:17.9567076+08:00|25|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-05-05T07:31:18.0275169+08:00|25|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-05-05T07:31:18.1003169+08:00|25|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-05-05T07:31:18.1651430+08:00|25|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-05-05T07:31:47.9862030+08:00|23|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-05-05T07:31:48.1836739+08:00|23|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 26b06925fc194e18b6c6768c45e01f7e(0-0). 
+2020-05-05T07:31:48.2126047+08:00|23|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 26b06925fc194e18b6c6768c45e01f7e(0-0). 
+2020-05-05T07:31:48.4748967+08:00|21|INFO|DataSync.Log|TransmissionSent. TransmissionId: 26b06925fc194e18b6c6768c45e01f7e(0-0). Capacity: 0. 
+2020-05-05T07:32:49.4574503+08:00|1|INFO|DataSync.Log|Transmitter flushed telemetry events. 
+2020-05-05T07:32:49.4694177+08:00|1|INFO|DataSync.Log|SerializationStarted. Items count: 1 
+2020-05-05T07:32:49.4833798+08:00|1|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: 12a04fce43ff49c6aa9c708d030b1d50(1-1). 
+2020-05-05T07:32:49.4953483+08:00|1|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: 12a04fce43ff49c6aa9c708d030b1d50(1-1). 
+2020-05-05T07:32:49.5172904+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed sender capacity to 0 
+2020-05-05T07:32:49.5292583+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed buffer capacity to 0 
+2020-05-05T07:32:49.5292583+08:00|1|INFO|DataSync.Log|StorageCapacityReset: DataSync.ApplicationLifecycleTransmissionPolicy 
+2020-05-05T07:32:49.5537058+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-05-05T07:32:49.5537058+08:00|8|INFO|DataSync.Log|TransmissionSent. TransmissionId: 12a04fce43ff49c6aa9c708d030b1d50(1-1). Capacity: 0. 
+2020-05-05T07:32:49.5696635+08:00|1|INFO|DataSync.Log|MovedFromBufferToStorage. 
+2020-05-05T07:32:49.5766442+08:00|8|WARN|DataSync.Log|SenderEnqueueNoCapacity. TransmissionCount: 0. Capacity: 0. 
+2020-05-05T07:32:49.5766442+08:00|1|INFO|DataSync.Log|TransmitterEmptyBuffer 
+2020-05-05T07:32:49.6045709+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 

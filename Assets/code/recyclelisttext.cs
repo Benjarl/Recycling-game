@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,7 +61,7 @@ namespace TestGameFrame
                     Day.color = new Color32(255, 0, 0, 225);
                     break;
             }
-            if (GameDataManager.TaskData.Mode > 1)
+            if (Convert.ToInt32(GameDataManager.TaskData.Mode) > 1)
             {
                 Day.color = new Color32(255, 0, 0, 0);
             }
@@ -329,7 +330,7 @@ namespace TestGameFrame
                     break;
             }
             GameEventCenter.DispatchEvent("timecosttext");
-            if (GameDataManager.TaskData.Mode < 2)
+            if (Convert.ToInt32(GameDataManager.TaskData.Mode) < 2)
             {
                 recyclething.text = '.' + recyclething.text;
                 recyclething.text = number + recyclething.text;

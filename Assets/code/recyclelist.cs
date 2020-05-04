@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameData;
@@ -16,9 +15,9 @@ namespace TestGameFrame
         public static int number = 0;
         public static int day = 1;
         //垃圾編號
-        string trashnumber = GameDataManager.TaskData.Trashnumber;
+        List<int> trashnumber = GameDataManager.TaskData.Trashnumber;
         //需要時間
-        int TotalTime = GameDataManager.TaskData.Time;
+        float TotalTime = GameDataManager.TaskData.Time;
         public static int i = 0;
         public Text Timedetext;
         public GameObject TimedttextO;
@@ -29,7 +28,6 @@ namespace TestGameFrame
         public Image TrashTwo;
         public Text Timelefttext;
         public GameObject TimelefttextO;
-        public int tasknum = 0;
         public string now;
         public AudioSource wrongaudio;
         public AudioSource startaudio;
@@ -38,7 +36,11 @@ namespace TestGameFrame
         public GameObject PositionCheck;
         public Text TimeAns;
         public int timewaste = 0;
+        public int Totaltimewaste = 0;
         public int trashnum = 0;
+        public bool issuccess = true;
+
+        List<Garbage> garbage = new List<Garbage>();
 
         public Text UserName;
         public Text Level;
@@ -52,7 +54,8 @@ namespace TestGameFrame
         public Text pointtext;
         public AudioSource correct;
 
-        private UserData Data;
+        private Garbage GData;
+        private ResultData RData;
         string recycle;
 
         // Start is called before the first frame update
@@ -60,18 +63,13 @@ namespace TestGameFrame
         {
             Wrongans.text = "";
             i = 0;
-            for (int j = 0; j < trashnumber.Length; j++)
-            {
-                if (trashnumber[j] == ' ')
-                    tasknum++;
-            }
             UserName.text = GameDataManager.FlowData.UserId;
-            Level.text = GameDataManager.TaskData.LevelName;
-            if (GameDataManager.TaskData.Mode == 0)
+            Level.text = GameDataManager.TaskData.TaskName;
+            if (Convert.ToInt32(GameDataManager.TaskData.Mode) == 0)
                 Mode.text = "新手";
-            else if (GameDataManager.TaskData.Mode == 1)
+            else if (Convert.ToInt32(GameDataManager.TaskData.Mode) == 1)
                 Mode.text = "提示";
-            else if (GameDataManager.TaskData.Mode == 2)
+            else if (Convert.ToInt32(GameDataManager.TaskData.Mode) == 2)
                 Mode.text = "挑戰";
             //開始倒數
             timed = 10;
@@ -99,7 +97,7 @@ namespace TestGameFrame
 
         void timer()
         {
-            //Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
+            Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
             timed--;
             Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 
@@ -132,22 +130,14 @@ namespace TestGameFrame
 
         public void changenum()  //換回收物與日期
         {
-            if (!Char.IsNumber(trashnumber, i))
-            {
-                i++;
-            }
-            if (i == trashnumber.Length)
+            if (i >= trashnumber.Count)
             {
                 end();
             }
             else
             {
-                number = 0;
-                while (Char.IsNumber(trashnumber, i))
-                {
-                    number = number * 10 + trashnumber[i] - 48;
-                    i++;
-                }
+                number = trashnumber[i];
+                i++;
                 System.Random rand = new System.Random();
                 day = rand.Next(1, 7);
                 recyclelisttext Recyclelisttext = FindObjectOfType<recyclelisttext>();
@@ -162,12 +152,7 @@ namespace TestGameFrame
         void timecost()
         {
             timewaste++;
-        }
-
-        public void wrong()  //錯誤題號
-        {
-            Wrongans.text = Wrongans.text + number + ' ';
-            wrongaudio.Play();
+            Totaltimewaste++;
         }
 
         void end()  //結算
@@ -178,13 +163,13 @@ namespace TestGameFrame
                 Application.Quit();
             });
 
-            Rightans.text = point + "/" + tasknum;
+            Rightans.text = point + "/" + trashnumber.Count;
             GamePanel.SetActive(false);
             EndPanel.SetActive(true);
 
             //存檔
-            Data = new UserData(UserName.text, Level.text, Mode.text, Rightans.text, Wrongans.text, TimeAns.text);
-            GameDataManager.LabDataManager.SendData(Data);
+            RData = new ResultData(Convert.ToSingle(point / trashnumber.Count) , Convert.ToSingle(Totaltimewaste / trashnumber.Count) , garbage);
+            GameDataManager.LabDataManager.SendData(RData);
         }
 
         void changetag(int number)  //分類
@@ -263,6 +248,8 @@ namespace TestGameFrame
             GameObject.Find("Trash." + number + "(Clone)").transform.position = Plaform.transform.position + new Vector3(-2f, 0.1f, 2f);
             CancelInvoke("timecost");
             TimeAns.text = TimeAns.text + timewaste + '秒' + '\n';
+            GData = new Garbage(number, issuccess, timewaste);
+            garbage.Add(GData);
             timewaste = 0;
         }
 
@@ -279,6 +266,14 @@ namespace TestGameFrame
             point++;
             correct.Play();
             pointtext.text = point.ToString();
+            issuccess = true;
+        }
+
+        public void wrong()  //錯誤題號
+        {
+            Wrongans.text = Wrongans.text + number + ' ';
+            wrongaudio.Play();
+            issuccess = false;
         }
     }
 }

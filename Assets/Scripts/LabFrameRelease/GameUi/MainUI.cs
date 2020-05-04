@@ -6,283 +6,340 @@ using UnityEngine;
 using UnityEngine.UI;
 using LabData;
 using System.IO;
+using System.Text.RegularExpressions;
 
-public class MainUI : MonoBehaviour
+namespace TestGameFrame
 {
-    public string UI_UserID;
-
-    public static string startpath;
-
-    //Main Panel
-    public InputField InputUserName;
-
-    public Dropdown Level;
-
-    public Button NextBotton;
-
-    public Button Leave;
-
-    public Button SetLevelButton;
-
-    //Set Panel
-    public Dropdown LevelDropdown;
-
-    public Button BackBotton;
-
-    public Button NewLevelButton;
-
-    public Button ChangeLevelButton;
-
-    public Button DeleteLevelButton;
-
-    //Create Panel
-    public Text CreateTitle;
-
-    public InputField LevelNameInput;
-
-    public Dropdown ModeDropdown;
-
-    public InputField TimeInputField;
-
-    public Text Timetext;
-
-    public GameObject TimeInputFieldO;
-
-    public GameObject TimetextO;
-
-    public Button ChooseTrashButton;
-
-    public Button BackButton;
-
-    public Button SaveButton;
-
-    //TrashPanel
-    public InputField TrashNumber;
-
-    public Button TrashSaveButton;
-
-    public Button TrashBackButton;
-
-    public string Tempnumber;
-
-    //判斷新增或更改
-    public static string set;
-
-    //Panel
-    public GameObject MainPanel;
-
-    public GameObject SetLevelPanel;
-
-    public GameObject CreatePanel;
-
-    public GameObject TrashPanel;
-
-    //MainUI
-    public void Start()
+    public class MainUI : MonoBehaviour
     {
-        //clean dropdown
-        Level.ClearOptions();
+        public static string startpath;
 
-        //必须先创建对应数据的文件夹
-        LabTools.CreateDataFolder<TaskConfig>();
+        List<int> trashnumber = new List<int>();
 
-        if (LabTools.GetDataName<TaskConfig>() != null)
+        //Main Panel
+        public InputField InputUserName;
+
+        public Dropdown Level;
+
+        public Button NextBotton;
+
+        public Button Leave;
+
+        public Button SetLevelButton;
+
+        //Set Panel
+        public Dropdown LevelDropdown;
+
+        public Button BackBotton;
+
+        public Button NewLevelButton;
+
+        public Button ChangeLevelButton;
+
+        public Button DeleteLevelButton;
+
+        //Create Panel
+        public Text CreateTitle;
+
+        public InputField LevelNameInput;
+
+        public Dropdown ModeDropdown;
+
+        public InputField TimeInputField;
+
+        public Text Timetext;
+
+        public GameObject TimeInputFieldO;
+
+        public GameObject TimetextO;
+
+        public Button ChooseTrashButton;
+
+        public Button BackButton;
+
+        public Button SaveButton;
+
+        //TrashPanel
+        public InputField TrashNumber;
+
+        public Button TrashSaveButton;
+
+        public Button TrashBackButton;
+
+        public string Tempnumber;
+
+        //判斷新增或更改
+        public static string set;
+
+        //Panel
+        public GameObject MainPanel;
+
+        public GameObject SetLevelPanel;
+
+        public GameObject CreatePanel;
+
+        public GameObject TrashPanel;
+
+        //MainUI
+        public void Start()
         {
-            //選關卡名稱
-            List<string> one = new List<string>();
-            one = LabTools.GetDataName<TaskConfig>();
-            for (int i = 0; i < one.Count; i++)
+            //clean dropdown
+            Level.ClearOptions();
+
+            //必须先创建对应数据的文件夹
+            LabTools.CreateDataFolder<RecyclingTaskInputData>();
+
+            if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
             {
-                var two = LabTools.GetData<TaskConfig>(one[i]);
-                Level.options.Add(new Dropdown.OptionData() { text = two.LevelName });
+                //選關卡名稱
+                List<string> one = new List<string>();
+                one = LabTools.GetDataName<RecyclingTaskInputData>();
+                for (int i = 0; i < one.Count; i++)
+                {
+                    var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
+                    Level.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+
+                }
             }
+
+            // panel In
+            MainPanel.SetActive(true);
+            SetLevelPanel.SetActive(false);
+            CreatePanel.SetActive(false);
+            TrashPanel.SetActive(false);
+
+            NextBotton.onClick.AddListener(delegate
+            {
+                RecyclingTaskInputData taskconfig = new RecyclingTaskInputData();
+                GameFlowData flowdata = new GameFlowData();
+                //搜尋對應現有的任務
+                List<string> temp = new List<string>();
+                temp = LabTools.GetDataName<RecyclingTaskInputData>();
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    var tempData = LabTools.GetData<RecyclingTaskInputData>(temp[i]);
+                    if (tempData.TaskName == Level.captionText.text)
+                    {
+                        taskconfig = tempData;
+                        break;
+                    }
+                }
+                GameDataManager.LabDataManager.LabDataCollectInit(() => InputUserName.text);
+                GameDataManager.FlowData = flowdata;
+                GameDataManager.FlowData.UserId = InputUserName.text;
+                GameDataManager.TaskData = taskconfig;
+                var GFData = new GameFlowData(InputUserName.text, Language.繁体, taskconfig);
+                LabTools.WriteData(GFData, InputUserName.text, true);
+                GameSceneManager.Instance.Change2MainScene();
+            });
+
+            Leave.onClick.AddListener(delegate
+            {
+                Application.Quit();
+            });
+
+            SetLevelButton.onClick.AddListener(delegate
+            {
+                MainPanel.SetActive(false);
+                SetLevelPanel.SetActive(true);
+                Setstart();
+            });
         }
 
-        // panel In
-        MainPanel.SetActive(true);
-        SetLevelPanel.SetActive(false);
-        CreatePanel.SetActive(false);
-        TrashPanel.SetActive(false);
-
-        NextBotton.onClick.AddListener(delegate
+        //SetUI
+        public void Setstart()
         {
-            UI_UserID = InputUserName.text;
-            TaskConfig taskconfig = new TaskConfig();
-            GameFlowData flowdata = new GameFlowData();
-            //搜尋對應現有的任務
+            LevelDropdown.ClearOptions();
+
+            if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+            {
+                //選關卡名稱
+                List<string> one = new List<string>();
+                one = LabTools.GetDataName<RecyclingTaskInputData>();
+                for (int i = 0; i < one.Count; i++)
+                {
+                    var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
+                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                }
+            }
+
+            BackBotton.onClick.AddListener(delegate
+            {
+                SetLevelPanel.SetActive(false);
+                MainPanel.SetActive(true);
+            });
+
+            NewLevelButton.onClick.AddListener(delegate
+            {
+                SetLevelPanel.SetActive(false);
+                CreatePanel.SetActive(true);
+                set = "New";
+                StartchangePanel();
+            });
+
+            ChangeLevelButton.onClick.AddListener(delegate
+            {
+                SetLevelPanel.SetActive(false);
+                CreatePanel.SetActive(true);
+                set = "Change";
+                StartchangePanel();
+            });
+            //刪除
+            DeleteLevelButton.onClick.AddListener(delegate
+            {
+                string path = Application.streamingAssetsPath + "/GameData/" + "/TaskConfig/" + LevelDropdown.captionText.text + ".json";
+                if (File.Exists(path))
+                    File.Delete(path);
+                path = Application.streamingAssetsPath + "/GameData/" + "/TaskConfig/" + LevelDropdown.captionText.text + ".json.meta";
+                if (File.Exists(path))
+                    File.Delete(path);
+
+                Level.ClearOptions();
+                LevelDropdown.ClearOptions();
+
+                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                {
+                //選關卡名稱
+                List<string> one = new List<string>();
+                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    for (int i = 0; i < one.Count; i++)
+                    {
+                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
+                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                    }
+                }
+
+                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                {
+                //選關卡名稱
+                List<string> one = new List<string>();
+                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    for (int i = 0; i < one.Count; i++)
+                    {
+                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
+                        Level.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                    }
+                }
+
+                MainPanel.SetActive(true);
+                SetLevelPanel.SetActive(false);
+            });
+        }
+
+        //CreateUI
+        public void StartchangePanel()
+        {
+            ChooseTrashButton.onClick.AddListener(delegate
+            {
+                CreatePanel.SetActive(false);
+                TrashPanel.SetActive(true);
+                Starttrash();
+            });
+
+            BackButton.onClick.AddListener(delegate
+            {
+                CreatePanel.SetActive(false);
+                SetLevelPanel.SetActive(true);
+            });
+
+            SaveButton.onClick.AddListener(delegate
+            {
+                if (ModeDropdown.value == 0)
+                    TimeInputField.text = "0";
+
+                trashnumber.Clear();
+                string[] sArray = TrashNumber.text.Split( );
+                for(int i=0;i<sArray.Length;i++)
+                    trashnumber.Add(Convert.ToInt32(sArray[i]));
+
+                var Data = new RecyclingTaskInputData(LevelNameInput.text, (Mode)ModeDropdown.value, Convert.ToSingle(TimeInputField.text), trashnumber);
+
+                LabTools.WriteData(Data, LevelNameInput.text, true);
+
+                Level.ClearOptions();
+                LevelDropdown.ClearOptions();
+
+                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                {
+                //選關卡名稱
+                List<string> one = new List<string>();
+                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    for (int i = 0; i < one.Count; i++)
+                    {
+                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
+                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                    }
+                }
+
+                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                {
+                //選關卡名稱
+                List<string> one = new List<string>();
+                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    for (int i = 0; i < one.Count; i++)
+                    {
+                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
+                        Level.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                    }
+                }
+
+                CreatePanel.SetActive(false);
+                SetLevelPanel.SetActive(true);
+            });
+
+            ModeDropdown.onValueChanged.AddListener(delegate
+            {
+                if (ModeDropdown.value == 0)
+                {
+                    TimeInputFieldO.SetActive(false);
+                    TimetextO.SetActive(false);
+                }
+                else
+                {
+                    TimeInputFieldO.SetActive(true);
+                    TimetextO.SetActive(true);
+                }
+            });
+
+            if (set == "New")
+                Startnew();
+
+            else if (set == "Change")
+                Startchange();
+        }
+
+        public void Startnew()
+        {
+            CreateTitle.text = "新增關卡";
+            LevelNameInput.text = "";
+            ModeDropdown.value = 0;
+            TimeInputField.text = "";
+            TrashNumber.text = "";
+            TimeInputFieldO.SetActive(false);
+            TimetextO.SetActive(false);
+        }
+
+        public void Startchange()
+        {
+            CreateTitle.text = "編輯關卡";
+            //讀取現有關卡
             List<string> temp = new List<string>();
-            temp = LabTools.GetDataName<TaskConfig>();
+            temp = LabTools.GetDataName<RecyclingTaskInputData>();
             for (int i = 0; i < temp.Count; i++)
             {
-                var tempData = LabTools.GetData<TaskConfig>(temp[i]);
-                if (tempData.LevelName == Level.captionText.text)
+                var Data = LabTools.GetData<RecyclingTaskInputData>(temp[i]);
+                if (Data.TaskName == LevelDropdown.captionText.text)
                 {
-                    taskconfig = tempData;
+                    LevelNameInput.text = Data.TaskName;
+                    ModeDropdown.value = Convert.ToInt32(Data.Mode);
+                    TimeInputField.text = Data.Time.ToString();
+                    TrashNumber.text = "";
+                    for (int j=0; j< Data.Trashnumber.Count; j++)
+                        TrashNumber.text += (Data.Trashnumber[j]).ToString() + " ";
+                    TrashNumber.text = TrashNumber.text.TrimEnd(' ');
                     break;
                 }
             }
-            flowdata.UserId = InputUserName.text;
-            GameDataManager.FlowData = flowdata;
-            GameDataManager.TaskData = taskconfig;
-            GameDataManager.LabDataManager.LabDataCollectInit(() => UI_UserID);
-            GameSceneManager.Instance.Change2MainScene();
-        });
-
-        Leave.onClick.AddListener(delegate
-        {
-            Application.Quit();
-        });
-
-        SetLevelButton.onClick.AddListener(delegate
-        {
-            MainPanel.SetActive(false);
-            SetLevelPanel.SetActive(true);
-            Setstart();
-        });
-    }
-
-    //SetUI
-    public void Setstart()
-    {
-        LevelDropdown.ClearOptions();
-
-        if (LabTools.GetDataName<TaskConfig>() != null)
-        {
-            //選關卡名稱
-            List<string> one = new List<string>();
-            one = LabTools.GetDataName<TaskConfig>();
-            for (int i = 0; i < one.Count; i++)
-            {
-                var two = LabTools.GetData<TaskConfig>(one[i]);
-                LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.LevelName });
-            }
-        }
-
-        BackBotton.onClick.AddListener(delegate
-        {
-            SetLevelPanel.SetActive(false);
-            MainPanel.SetActive(true);
-        });
-
-        NewLevelButton.onClick.AddListener(delegate
-        {
-            SetLevelPanel.SetActive(false);
-            CreatePanel.SetActive(true);
-            set = "New";
-            StartchangePanel();
-        });
-
-        ChangeLevelButton.onClick.AddListener(delegate
-        {
-            SetLevelPanel.SetActive(false);
-            CreatePanel.SetActive(true);
-            set = "Change";
-            StartchangePanel();
-        });
-        //刪除
-        DeleteLevelButton.onClick.AddListener(delegate
-        {
-            string path = Application.streamingAssetsPath + "/GameData/" + "/TaskConfig/" + LevelDropdown.captionText.text + ".json";
-            if (File.Exists(path))
-                File.Delete(path);
-            path = Application.streamingAssetsPath + "/GameData/" + "/TaskConfig/" + LevelDropdown.captionText.text + ".json.meta";
-            if (File.Exists(path))
-                File.Delete(path);
-
-            Level.ClearOptions();
-            LevelDropdown.ClearOptions();
-
-            if (LabTools.GetDataName<TaskConfig>() != null)
-            {
-                //選關卡名稱
-                List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskConfig>();
-                for (int i = 0; i < one.Count; i++)
-                {
-                    var two = LabTools.GetData<TaskConfig>(one[i]);
-                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.LevelName });
-                }
-            }
-
-            if (LabTools.GetDataName<TaskConfig>() != null)
-            {
-                //選關卡名稱
-                List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskConfig>();
-                for (int i = 0; i < one.Count; i++)
-                {
-                    var two = LabTools.GetData<TaskConfig>(one[i]);
-                    Level.options.Add(new Dropdown.OptionData() { text = two.LevelName });
-                }
-            }
-
-            MainPanel.SetActive(true);
-            SetLevelPanel.SetActive(false);
-        });
-    }
-
-    //CreateUI
-    public void StartchangePanel()
-    {
-        ChooseTrashButton.onClick.AddListener(delegate
-        {
-            CreatePanel.SetActive(false);
-            TrashPanel.SetActive(true);
-            Starttrash();
-        });
-
-        BackButton.onClick.AddListener(delegate
-        {
-            CreatePanel.SetActive(false);
-            SetLevelPanel.SetActive(true);
-        });
-
-        SaveButton.onClick.AddListener(delegate
-        {
-            if (ModeDropdown.value == 0)
-                TimeInputField.text = "0";
-
-            var Data = new TaskConfig(LevelNameInput.text, ModeDropdown.value, Convert.ToInt32(TimeInputField.text), (TrashNumber.text + " "));
-
-            if (set == "New")
-                LabTools.WriteData(Data, LevelNameInput.text, true);
-
-            else if (set == "Change")
-                LabTools.WriteData(Data, LevelNameInput.text, true);
-
-            Level.ClearOptions();
-            LevelDropdown.ClearOptions();
-
-            if (LabTools.GetDataName<TaskConfig>() != null)
-            {
-                //選關卡名稱
-                List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskConfig>();
-                for (int i = 0; i < one.Count; i++)
-                {
-                    var two = LabTools.GetData<TaskConfig>(one[i]);
-                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.LevelName });
-                }
-            }
-
-            if (LabTools.GetDataName<TaskConfig>() != null)
-            {
-                //選關卡名稱
-                List<string> one = new List<string>();
-                one = LabTools.GetDataName<TaskConfig>();
-                for (int i = 0; i < one.Count; i++)
-                {
-                    var two = LabTools.GetData<TaskConfig>(one[i]);
-                    Level.options.Add(new Dropdown.OptionData() { text = two.LevelName });
-                }
-            }
-
-            CreatePanel.SetActive(false);
-            SetLevelPanel.SetActive(true);
-        });
-
-        ModeDropdown.onValueChanged.AddListener(delegate
-        {
             if (ModeDropdown.value == 0)
             {
                 TimeInputFieldO.SetActive(false);
@@ -293,74 +350,27 @@ public class MainUI : MonoBehaviour
                 TimeInputFieldO.SetActive(true);
                 TimetextO.SetActive(true);
             }
-        });
-
-        if (set == "New")
-            Startnew();
-
-        else if (set == "Change")
-            Startchange();
-    }
-
-    public void Startnew()
-    {
-        CreateTitle.text = "新增關卡";
-        LevelNameInput.text = "";
-        ModeDropdown.value = 0;
-        TimeInputField.text = "";
-        TrashNumber.text = "";
-        TimeInputFieldO.SetActive(false);
-        TimetextO.SetActive(false);
-    }
-
-    public void Startchange()
-    {
-        CreateTitle.text = "編輯關卡";
-        //讀取現有關卡
-        List<string> temp = new List<string>();
-        temp = LabTools.GetDataName<TaskConfig>();
-        for (int i = 0; i < temp.Count; i++)
-        {
-            var Data = LabTools.GetData<TaskConfig>(temp[i]);
-            if (Data.LevelName == LevelDropdown.captionText.text)
-            {
-                LevelNameInput.text = Data.LevelName;
-                ModeDropdown.value = Data.Mode;
-                TimeInputField.text = Data.Time.ToString();
-                TrashNumber.text = Data.Trashnumber;
-                break;
-            }
         }
-        if (ModeDropdown.value == 0)
-        {
-            TimeInputFieldO.SetActive(false);
-            TimetextO.SetActive(false);
-        }
-        else
-        {
-            TimeInputFieldO.SetActive(true);
-            TimetextO.SetActive(true);
-        }
-    }
 
-    //TrashUI
-    public void Starttrash()
-    {
-        Tempnumber = TrashNumber.text;
-
-        TrashBackButton.onClick.AddListener(delegate
-        {
-            TrashNumber.text = Tempnumber;
-            TrashPanel.SetActive(false);
-            CreatePanel.SetActive(true);
-        });
-
-        TrashSaveButton.onClick.AddListener(delegate
+        //TrashUI
+        public void Starttrash()
         {
             Tempnumber = TrashNumber.text;
-            TrashPanel.SetActive(false);
-            CreatePanel.SetActive(true);
-        });
+
+            TrashBackButton.onClick.AddListener(delegate
+            {
+                TrashNumber.text = Tempnumber;
+                TrashPanel.SetActive(false);
+                CreatePanel.SetActive(true);
+            });
+
+            TrashSaveButton.onClick.AddListener(delegate
+            {
+                Tempnumber = TrashNumber.text;
+                TrashPanel.SetActive(false);
+                CreatePanel.SetActive(true);
+            });
+        }
     }
 }
 

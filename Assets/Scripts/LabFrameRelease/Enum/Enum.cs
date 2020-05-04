@@ -32,10 +32,10 @@ public enum GamePlantType
 /// <summary>
 /// 遊戲難度
 /// </summary>
-public enum Difficult
+public enum Mode
 {
-    Easy,
-    Normal,
-    Hard
+    Novice,
+    Tips,
+    Challenge
 }
 
