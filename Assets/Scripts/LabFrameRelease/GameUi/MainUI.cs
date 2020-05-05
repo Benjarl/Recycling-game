@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameData;
@@ -187,12 +188,7 @@ namespace TestGameFrame
             //刪除
             DeleteLevelButton.onClick.AddListener(delegate
             {
-                string path = Application.streamingAssetsPath + "/GameData/" + "/TaskConfig/" + LevelDropdown.captionText.text + ".json";
-                if (File.Exists(path))
-                    File.Delete(path);
-                path = Application.streamingAssetsPath + "/GameData/" + "/TaskConfig/" + LevelDropdown.captionText.text + ".json.meta";
-                if (File.Exists(path))
-                    File.Delete(path);
+                LabTools.DeleteData<RecyclingTaskInputData>(LevelDropdown.captionText.text);
 
                 Level.ClearOptions();
                 LevelDropdown.ClearOptions();
