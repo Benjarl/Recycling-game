@@ -93,9 +93,9 @@ namespace LabData
             options.EndpointAddress = LabTools.GetConfig<LabDataConfig>().ServerPath;
 
 
-            if (!Directory.Exists("TestStore"))
+            if (!Directory.Exists(labDataSavePath + "/TestStore"))
             {
-                Directory.CreateDirectory("TestStore");
+                Directory.CreateDirectory(labDataSavePath + "/TestStore");
             }
             _applicationLifecycle = new SimpleApplicationLifecycle();
 
