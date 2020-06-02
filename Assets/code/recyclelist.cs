@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using LabData;
 using System.IO;
 using Valve.VR;
+using Mindfrog.Recycling;
 
 namespace TestGameFrame
 {
@@ -15,9 +16,9 @@ namespace TestGameFrame
         public static int number = 0;
         public static int day = 1;
         //垃圾編號
-        List<int> trashnumber = GameDataManager.TaskData.Trashnumber;
+        List<int> trashnumber = GameDataManager.FlowData.TaskData.Trashnumbers;
         //需要時間
-        float TotalTime = GameDataManager.TaskData.Time;
+        float TotalTime = GameDataManager.FlowData.TaskData.LimitTime;
         public static int i = 0;
         public Text Timedetext;
         public GameObject TimedttextO;
@@ -40,7 +41,7 @@ namespace TestGameFrame
         public int trashnum = 0;
         public bool issuccess = true;
 
-        List<Garbage> garbage = new List<Garbage>();
+        List<RecyclingGarbage> garbage = new List<RecyclingGarbage>();
 
         public Text UserName;
         public Text Level;
@@ -54,8 +55,8 @@ namespace TestGameFrame
         public Text pointtext;
         public AudioSource correct;
 
-        private Garbage GData;
-        private ResultData RData;
+        private RecyclingGarbage GData;
+        private RecyclingScopeOutput RData;
         string recycle;
 
         // Start is called before the first frame update
@@ -64,12 +65,12 @@ namespace TestGameFrame
             Wrongans.text = "";
             i = 0;
             UserName.text = GameDataManager.FlowData.UserId;
-            Level.text = GameDataManager.TaskData.TaskName;
-            if (Convert.ToInt32(GameDataManager.TaskData.Mode) == 0)
+           Level.text ="";
+            if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) == 0)
                 Mode.text = "新手";
-            else if (Convert.ToInt32(GameDataManager.TaskData.Mode) == 1)
+            else if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) == 1)
                 Mode.text = "提示";
-            else if (Convert.ToInt32(GameDataManager.TaskData.Mode) == 2)
+            else if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) == 2)
                 Mode.text = "挑戰";
             //開始倒數
             timed = 10;
@@ -107,7 +108,7 @@ namespace TestGameFrame
                 TimedttextO.SetActive(false);
                 GamePanel.SetActive(true);
                 changenum();
-                if (GameDataManager.TaskData.Mode > 0)
+                if (GameDataManager.FlowData.TaskData.GameDifficulty > 0)
                 {
                     TimelefttextO.SetActive(true);
                     InvokeRepeating("timeleft", 1, 1);
@@ -168,7 +169,11 @@ namespace TestGameFrame
             EndPanel.SetActive(true);
 
             //存檔
-            RData = new ResultData(Convert.ToSingle(point / trashnumber.Count) , Convert.ToSingle(Totaltimewaste / trashnumber.Count) , garbage);
+            RData = new RecyclingScopeOutput() {
+                CorrectRate = Convert.ToSingle(point / trashnumber.Count),
+                AverageTime = Convert.ToSingle(Totaltimewaste / trashnumber.Count),
+                Garbages = garbage,
+            };
             GameDataManager.LabDataManager.SendData(RData);
         }
 
@@ -236,7 +241,7 @@ namespace TestGameFrame
                 TrashOne.color = new Color32(0, 0, 0, 225);
                 TrashTwo.color = new Color32(0, 0, 255, 0);
             }
-            if (GameDataManager.TaskData.Mode > 0)
+            if (GameDataManager.FlowData.TaskData.GameDifficulty > 0)
             {
                 TrashOne.color = new Color32(0, 225, 0, 0);
                 TrashTwo.color = new Color32(0, 0, 255, 0);
@@ -248,7 +253,11 @@ namespace TestGameFrame
             GameObject.Find("Trash." + number + "(Clone)").transform.position = Plaform.transform.position + new Vector3(-2f, 0.1f, 2f);
             CancelInvoke("timecost");
             TimeAns.text = TimeAns.text + timewaste + '秒' + '\n';
-            GData = new Garbage(number, issuccess, timewaste);
+            GData = new RecyclingGarbage() { 
+                GarbageIDP=number,
+                IsSuccess=issuccess,
+                TimeToUse=(float)timewaste
+            };
             garbage.Add(GData);
             timewaste = 0;
         }

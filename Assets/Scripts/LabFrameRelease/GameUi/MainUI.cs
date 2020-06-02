@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using LabData;
 using System.IO;
 using System.Text.RegularExpressions;
+using Mindfrog.Recycling;
+using Mindfrog;
 
 namespace TestGameFrame
 {
@@ -88,17 +90,17 @@ namespace TestGameFrame
             Level.ClearOptions();
 
             //必须先创建对应数据的文件夹
-            LabTools.CreateDataFolder<RecyclingTaskInputData>();
+            LabTools.CreateDataFolder<RecyclingScopeInput>();
 
-            if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+            if (LabTools.GetDataName<RecyclingScopeInput>() != null)
             {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                one = LabTools.GetDataName<RecyclingTaskInputData>();
+                one = LabTools.GetDataName<RecyclingScopeInput>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
-                    Level.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                    var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
+                    Level.options.Add(new Dropdown.OptionData() { text = "FileName" });
 
                 }
             }
@@ -111,25 +113,24 @@ namespace TestGameFrame
 
             NextBotton.onClick.AddListener(delegate
             {
-                RecyclingTaskInputData taskconfig = new RecyclingTaskInputData();
+                Mindfrog.Recycling.RecyclingScopeInput taskconfig = new Mindfrog.Recycling.RecyclingScopeInput();
                 GameFlowData flowdata = new GameFlowData();
                 //搜尋對應現有的任務
                 List<string> temp = new List<string>();
-                temp = LabTools.GetDataName<RecyclingTaskInputData>();
+                temp = LabTools.GetDataName<Mindfrog.Recycling.RecyclingScopeInput>();
                 for (int i = 0; i < temp.Count; i++)
                 {
-                    var tempData = LabTools.GetData<RecyclingTaskInputData>(temp[i]);
-                    if (tempData.TaskName == Level.captionText.text)
-                    {
-                        taskconfig = tempData;
-                        break;
-                    }
+                    var tempData = LabTools.GetData<Mindfrog.Recycling.RecyclingScopeInput>(temp[i]);
+                    //if (tempData.TaskName == Level.captionText.text)
+                    //{
+                    //    taskconfig = tempData;
+                    //    break;
+                    //}
                 }
                 GameDataManager.LabDataManager.LabDataCollectInit(() => InputUserName.text);
                 GameDataManager.FlowData = flowdata;
                 GameDataManager.FlowData.UserId = InputUserName.text;
-                GameDataManager.TaskData = taskconfig;
-                var GFData = new GameFlowData(InputUserName.text, Language.繁体, taskconfig);
+                var GFData = new GameFlowData(InputUserName.text, taskconfig);
                 LabTools.WriteData(GFData, InputUserName.text, true);
                 GameSceneManager.Instance.Change2MainScene();
             });
@@ -152,15 +153,15 @@ namespace TestGameFrame
         {
             LevelDropdown.ClearOptions();
 
-            if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+            if (LabTools.GetDataName<RecyclingScopeInput>() != null)
             {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                one = LabTools.GetDataName<RecyclingTaskInputData>();
+                one = LabTools.GetDataName<RecyclingScopeInput>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
-                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                    var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
+                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = "FileName" });
                 }
             }
 
@@ -188,32 +189,32 @@ namespace TestGameFrame
             //刪除
             DeleteLevelButton.onClick.AddListener(delegate
             {
-                LabTools.DeleteData<RecyclingTaskInputData>(LevelDropdown.captionText.text);
+                LabTools.DeleteData<RecyclingScopeInput>(LevelDropdown.captionText.text);
 
                 Level.ClearOptions();
                 LevelDropdown.ClearOptions();
 
-                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                if (LabTools.GetDataName<RecyclingScopeInput>() != null)
                 {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
-                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
+                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = "FileName" });
                     }
                 }
 
-                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                if (LabTools.GetDataName<RecyclingScopeInput>() != null)
                 {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
-                        Level.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
+                        Level.options.Add(new Dropdown.OptionData() { text = "FileName" });
                     }
                 }
 
@@ -248,34 +249,40 @@ namespace TestGameFrame
                 for(int i=0;i<sArray.Length;i++)
                     trashnumber.Add(Convert.ToInt32(sArray[i]));
 
-                var Data = new RecyclingTaskInputData(LevelNameInput.text, (Mode)ModeDropdown.value, Convert.ToSingle(TimeInputField.text), trashnumber);
+                //var Data = new RecyclingScopeInput((Difficulty)ModeDropdown.value, Convert.ToSingle(TimeInputField.text), trashnumber);
+                var Data = new RecyclingScopeInput() {
+                    GameDifficulty = (Difficulty)ModeDropdown.value,
+                    LimitTime = Convert.ToSingle(TimeInputField.text),
+                    Trashnumbers= trashnumber
+                };
+
 
                 LabTools.WriteData(Data, LevelNameInput.text, true);
 
                 Level.ClearOptions();
                 LevelDropdown.ClearOptions();
 
-                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                if (LabTools.GetDataName<RecyclingScopeInput>() != null)
                 {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
-                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
+                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = "FileName" });
                     }
                 }
 
-                if (LabTools.GetDataName<RecyclingTaskInputData>() != null)
+                if (LabTools.GetDataName<RecyclingScopeInput>() != null)
                 {
                 //選關卡名稱
                 List<string> one = new List<string>();
-                    one = LabTools.GetDataName<RecyclingTaskInputData>();
+                    one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingTaskInputData>(one[i]);
-                        Level.options.Add(new Dropdown.OptionData() { text = two.TaskName });
+                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
+                        Level.options.Add(new Dropdown.OptionData() { text ="FileName" });
                     }
                 }
 
@@ -320,21 +327,17 @@ namespace TestGameFrame
             CreateTitle.text = "編輯關卡";
             //讀取現有關卡
             List<string> temp = new List<string>();
-            temp = LabTools.GetDataName<RecyclingTaskInputData>();
+            temp = LabTools.GetDataName<RecyclingScopeInput>();
             for (int i = 0; i < temp.Count; i++)
             {
-                var Data = LabTools.GetData<RecyclingTaskInputData>(temp[i]);
-                if (Data.TaskName == LevelDropdown.captionText.text)
-                {
-                    LevelNameInput.text = Data.TaskName;
-                    ModeDropdown.value = Convert.ToInt32(Data.Mode);
-                    TimeInputField.text = Data.Time.ToString();
+                var Data = LabTools.GetData<RecyclingScopeInput>(temp[i]);
+                //因Name问题 需要修改
+                    ModeDropdown.value = Convert.ToInt32(Data.GameDifficulty);
+                    TimeInputField.text = Data.LimitTime.ToString();
                     TrashNumber.text = "";
-                    for (int j=0; j< Data.Trashnumber.Count; j++)
-                        TrashNumber.text += (Data.Trashnumber[j]).ToString() + " ";
+                    for (int j = 0; j < Data.Trashnumbers.Count; j++)
+                    TrashNumber.text += (Data.Trashnumbers[j]).ToString() + " ";
                     TrashNumber.text = TrashNumber.text.TrimEnd(' ');
-                    break;
-                }
             }
             if (ModeDropdown.value == 0)
             {

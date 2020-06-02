@@ -44,18 +44,18 @@ namespace LabData
             return converter.ConvertTitle(o.ToJson());
         }
 
-        public static Pos ToPos(this Vector3 vector3)
+        public static Mindfrog.Pos ToPos(this Vector3 vector3)
         {
-            return new Pos()
+            return new Mindfrog.Pos()
             {
                 X = vector3.x,
                 Y = vector3.y,
                 Z = vector3.z
             };
         }
-        public static QuaternionPos ToQuaternionPos(this Quaternion quaternion)
+        public static Mindfrog.Qua ToQuaternionPos(this Quaternion quaternion)
         {
-            return new QuaternionPos()
+            return new Mindfrog.Qua()
             {
                 X = quaternion.x,
                 Y = quaternion.y,

@@ -95,5 +95,6 @@ namespace TestGameFrame
         public GameEntityBase Trash85;
 
         public recyclelist MianSceneUI;
+
     }
 }
