@@ -16,9 +16,9 @@ namespace TestGameFrame
         public static int number = 0;
         public static int day = 1;
         //垃圾編號
-        List<int> trashnumber = GameDataManager.FlowData.TaskData.Trashnumbers;
+        List<int> trashnumber = GameDataManager.GameData.Trashnumbers;
         //需要時間
-        float TotalTime = GameDataManager.FlowData.TaskData.LimitTime;
+        float TotalTime = GameDataManager.GameData.LimitTime;
         public static int i = 0;
         public Text Timedetext;
         public GameObject TimedttextO;
@@ -66,11 +66,11 @@ namespace TestGameFrame
             i = 0;
             UserName.text = GameDataManager.FlowData.UserId;
            Level.text ="";
-            if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) == 0)
+            if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) == 0)
                 Mode.text = "新手";
-            else if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) == 1)
+            else if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) == 1)
                 Mode.text = "提示";
-            else if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) == 2)
+            else if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) == 2)
                 Mode.text = "挑戰";
             //開始倒數
             timed = 10;
@@ -108,7 +108,7 @@ namespace TestGameFrame
                 TimedttextO.SetActive(false);
                 GamePanel.SetActive(true);
                 changenum();
-                if (GameDataManager.FlowData.TaskData.GameDifficulty > 0)
+                if (GameDataManager.GameData.GameDifficulty > 0)
                 {
                     TimelefttextO.SetActive(true);
                     InvokeRepeating("timeleft", 1, 1);
@@ -241,7 +241,7 @@ namespace TestGameFrame
                 TrashOne.color = new Color32(0, 0, 0, 225);
                 TrashTwo.color = new Color32(0, 0, 255, 0);
             }
-            if (GameDataManager.FlowData.TaskData.GameDifficulty > 0)
+            if (GameDataManager.GameData.GameDifficulty > 0)
             {
                 TrashOne.color = new Color32(0, 225, 0, 0);
                 TrashTwo.color = new Color32(0, 0, 255, 0);

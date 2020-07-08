@@ -20,7 +20,8 @@ public class GameDataManager : MonoSingleton<GameDataManager>, IGameManager
     /// 游戏数据
     /// </summary>
     public static GameFlowData FlowData { get; set; }
-   
+    public static Mindfrog.Recycling.RecyclingScopeInput GameData { get; set; }
+
 
     int IGameManager.Weight => GobalData.GameDataManagerWeight;
 

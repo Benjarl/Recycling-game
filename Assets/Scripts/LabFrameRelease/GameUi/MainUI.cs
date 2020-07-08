@@ -99,9 +99,7 @@ namespace TestGameFrame
                 one = LabTools.GetDataName<RecyclingScopeInput>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
-                    Level.options.Add(new Dropdown.OptionData() { text = "FileName" });
-
+                    Level.options.Add(new Dropdown.OptionData() { text = one[i] });
                 }
             }
 
@@ -121,14 +119,15 @@ namespace TestGameFrame
                 for (int i = 0; i < temp.Count; i++)
                 {
                     var tempData = LabTools.GetData<Mindfrog.Recycling.RecyclingScopeInput>(temp[i]);
-                    //if (tempData.TaskName == Level.captionText.text)
-                    //{
-                    //    taskconfig = tempData;
-                    //    break;
-                    //}
+                    if (temp[i] == Level.captionText.text)
+                    {
+                        taskconfig = tempData;
+                        break;
+                    }
                 }
                 GameDataManager.LabDataManager.LabDataCollectInit(() => InputUserName.text);
                 GameDataManager.FlowData = flowdata;
+                GameDataManager.GameData = taskconfig;
                 GameDataManager.FlowData.UserId = InputUserName.text;
                 var GFData = new GameFlowData(InputUserName.text, taskconfig);
                 LabTools.WriteData(GFData, InputUserName.text, true);
@@ -160,8 +159,7 @@ namespace TestGameFrame
                 one = LabTools.GetDataName<RecyclingScopeInput>();
                 for (int i = 0; i < one.Count; i++)
                 {
-                    var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
-                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = "FileName" });
+                    LevelDropdown.options.Add(new Dropdown.OptionData() { text = one[i] });
                 }
             }
 
@@ -183,6 +181,7 @@ namespace TestGameFrame
             {
                 SetLevelPanel.SetActive(false);
                 CreatePanel.SetActive(true);
+                LevelNameInput.text = LevelDropdown.captionText.text;
                 set = "Change";
                 StartchangePanel();
             });
@@ -201,8 +200,7 @@ namespace TestGameFrame
                     one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
-                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = "FileName" });
+                        Level.options.Add(new Dropdown.OptionData() { text = one[i] });
                     }
                 }
 
@@ -213,8 +211,7 @@ namespace TestGameFrame
                     one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
-                        Level.options.Add(new Dropdown.OptionData() { text = "FileName" });
+                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = one[i] });
                     }
                 }
 
@@ -269,8 +266,7 @@ namespace TestGameFrame
                     one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
-                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = "FileName" });
+                        Level.options.Add(new Dropdown.OptionData() { text = one[i] });
                     }
                 }
 
@@ -281,8 +277,7 @@ namespace TestGameFrame
                     one = LabTools.GetDataName<RecyclingScopeInput>();
                     for (int i = 0; i < one.Count; i++)
                     {
-                        var two = LabTools.GetData<RecyclingScopeInput>(one[i]);
-                        Level.options.Add(new Dropdown.OptionData() { text ="FileName" });
+                        LevelDropdown.options.Add(new Dropdown.OptionData() { text = one[i] });
                     }
                 }
 

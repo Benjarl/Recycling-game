@@ -61,7 +61,7 @@ namespace TestGameFrame
                     Day.color = new Color32(255, 0, 0, 225);
                     break;
             }
-            if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) > 1)
+            if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) > 1)
             {
                 Day.color = new Color32(255, 0, 0, 0);
             }
@@ -330,7 +330,7 @@ namespace TestGameFrame
                     break;
             }
             GameEventCenter.DispatchEvent("timecosttext");
-            if (Convert.ToInt32(GameDataManager.FlowData.TaskData.GameDifficulty) < 2)
+            if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) < 2)
             {
                 recyclething.text = '.' + recyclething.text;
                 recyclething.text = number + recyclething.text;
