@@ -1,6 +1,4 @@
-﻿
-
-using GameData;
+﻿using GameData;
 using LabData;
 using System;
 using System.Collections;
@@ -8,35 +6,30 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
+using Newtonsoft.Json;
 
 public class GameApplication : MonoSingleton<GameApplication>
 {
+    public enum DisposeOptions
+    {
+        Default,
+        Back2Ui
+    }
 
     private bool _isOnApplicationQuit;
-    private bool _isDisposeCompleted;
     /// <summary>
     /// 继承Manager的集合
     /// </summary>
     private List<IGameManager> _gameManagers;
-    public static bool IsVR = false;
+
+    private ApplicationConfig _appliacationConfig;
 
     private void Awake()
     {
-        var applicationConfig = LabTools.GetConfig<ApplicationConfig>();
-        XRSettings.enabled = applicationConfig.IsOpenVR;
-        IsVR= applicationConfig.IsOpenVR;
+
         DontDestroyOnLoad(this);
         GameApplicationInit();
-        //自身启动
-        if (applicationConfig.OneSelf)
-        {            
-            OneSelfStart();
-        }
-        //外部启动
-        else
-        {
-            ExternalStart();
-        }
+        ApplicationRun();
     }
 
     /// <summary>
@@ -45,56 +38,64 @@ public class GameApplication : MonoSingleton<GameApplication>
     public void GameApplicationInit()
     {
         _isOnApplicationQuit = false;
+        _appliacationConfig = LabTools.GetConfig<ApplicationConfig>();
+        XRSettings.enabled = _appliacationConfig.IsOpenVR;
         GameEventCenter.EventCenterInit();
         _gameManagers = FindObjectsOfType<MonoBehaviour>().OfType<IGameManager>().ToList().OrderBy(m => m.Weight).ToList();
         _gameManagers.ForEach(p =>
         {
-            p.ManagerInit();          
+            p.ManagerInit();
         });
     }
 
     /// <summary>
     /// 销毁
     /// </summary>
-    public void GameApplicationDispose()
+    public void GameApplicationDispose(DisposeOptions options = DisposeOptions.Default)
     {
-        GameEventCenter.RemoveAllEvents();
-        StartCoroutine(GameApplicationDisposeEnumerator());
+        StartCoroutine(GameApplicationDisposeEnumerator(options));
     }
 
-    private IEnumerator GameApplicationDisposeEnumerator()
+    private IEnumerator GameApplicationDisposeEnumerator(DisposeOptions options = DisposeOptions.Default)
     {
+
         if (_gameManagers.Count <= 0)
         {
-            yield break;
+            yield return null;
         }
-        
-        for (int i = 0; i < _gameManagers.Count; i++)
+        else
         {
-            yield return StartCoroutine(_gameManagers[i].ManagerDispose());
+            foreach (var t in _gameManagers)
+            {
+                yield return StartCoroutine(t.ManagerDispose());
+            }
         }
+
         _gameManagers.Clear();
-        _isDisposeCompleted = true;
+        GameEventCenter.RemoveAllEvents();
+        switch (options)
+        {
+            case DisposeOptions.Default:
+                yield return null;
+                break;
+            case DisposeOptions.Back2Ui:
+                GameApplicationInit();
+                ApplicationRun();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
         yield return null;
     }
+
     public void GameApplicationQuit()
     {
         if (!_isOnApplicationQuit)
         {
             GameApplicationDispose();
+            Application.Quit();
             _isOnApplicationQuit = true;
-            StartCoroutine(WaitforQuitGame());
         }
-    }
-
-    /// <summary>
-    /// 等待Dispose結束才Application.Quit
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator WaitforQuitGame()
-    {
-        yield return new WaitUntil(() => _isDisposeCompleted);
-        Application.Quit();
     }
 
     protected override void OnApplicationQuit()
@@ -103,26 +104,53 @@ public class GameApplication : MonoSingleton<GameApplication>
         base.OnApplicationQuit();
     }
 
-    /// <summary>
-    /// 外部启动
-    /// </summary>
-    private void ExternalStart()
+    private void ApplicationRun()
     {
-        string[] arguments = Environment.GetCommandLineArgs();       
-        GameDataManager.FlowData = LabTools.GetDataByString<GameFlowData>(arguments[1]);
-        GameDataManager.LabDataManager.LabDataCollectInit(()=> GameDataManager.FlowData.UserId);
-        GameSceneManager.Instance.Change2MainScene();
+
+        if (!_appliacationConfig.OneSelf)
+        {
+            string[] arguments = Environment.GetCommandLineArgs();
+
+            GameFlowData gameFlowData = new GameFlowData();
+
+            Debug.Log(arguments[1]);
+
+            var data = GetJsonData(GetUrl(arguments[1]));
+
+            Debug.Log(data);
+
+
+            //var input = JsonConvert.DeserializeObject<Mindfrog.HandGrasping.HandGraspingScopeInput>(data);
+
+            //gameFlowData.HandGraspingInput = input;
+
+            gameFlowData.UserId = "Serve";
+
+            GameDataManager.FlowData = gameFlowData;
+
+            GameDataManager.LabDataManager.LabDataCollectInit(() => GameDataManager.FlowData.UserId);
+
+            GameSceneManager.Instance.Change2MainScene();
+        }
+        else
+        {
+            GameSceneManager.Instance.Change2MainUI();
+        }
     }
 
-    /// <summary>
-    /// 自身启动
-    /// </summary>
-    private void OneSelfStart()
+    public string GetUrl(string url)
     {
-        GameSceneManager.Instance.Change2MainUI();
+        string outUrl = "";
+        string[] str = url.Split('/');
+        outUrl = str[1];
+        return outUrl;
     }
 
-
+    public string GetJsonData(string str)
+    {
+        var data = str.Replace("%7B", "{").Replace("%7D", "}").Replace("%22", "\"");
+        return data;
+    }
 }
 
 

@@ -1,0 +1,1 @@
+{"CorrectRate":0.0,"AverageTime":0.0,"Garbages":[{"GarbageIDP":2,"IsSuccess":true,"TimeToUse":1.0},{"GarbageIDP":4,"IsSuccess":false,"TimeToUse":0.0},{"GarbageIDP":6,"IsSuccess":false,"TimeToUse":0.0},{"GarbageIDP":45,"IsSuccess":false,"TimeToUse":0.0}],"Timestamp":"2020-07-10T04:04:37.1496348+08:00","Sequence":null,"GlobalData":{}}

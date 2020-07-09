@@ -60,20 +60,29 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
     /// </summary>
     public void Change2MainScene()
     {
-        if (GameApplication.IsVR)
-        {
-            ChangeScene(new List<Action>()
-            {
-                GameUIManager.Instance.StartMainUiLogic,
-                GameEntityManager.Instance.SetSceneEntity,
-                GameTaskManager.Instance.StartGameTask,
+        //if (GameApplication.IsVR)
+        //{
+        //    ChangeScene(new List<Action>()
+        //    {
+        //        GameUIManager.Instance.StartMainUiLogic,
+        //        GameEntityManager.Instance.SetSceneEntity,
+        //        GameTaskManager.Instance.StartGameTask,
             
-                //TODO 转场出场景需要做的事情
-            }, GobalData.MainScene+"_VR");
-        }
-        else
-        {
-            ChangeScene(new List<Action>()
+        //        //TODO 转场出场景需要做的事情
+        //    }, GobalData.MainScene+"_VR");
+        //}
+        //else
+        //{
+        //    ChangeScene(new List<Action>()
+        //    {
+        //        GameUIManager.Instance.StartMainUiLogic,
+        //        GameEntityManager.Instance.SetSceneEntity,
+        //        GameTaskManager.Instance.StartGameTask,
+            
+        //        //TODO 转场出场景需要做的事情
+        //    }, GobalData.MainScene);
+        //}
+        ChangeScene(new List<Action>()
             {
                 GameUIManager.Instance.StartMainUiLogic,
                 GameEntityManager.Instance.SetSceneEntity,
@@ -81,7 +90,6 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
             
                 //TODO 转场出场景需要做的事情
             }, GobalData.MainScene);
-        }
     }
 
     void IGameManager.ManagerInit()
