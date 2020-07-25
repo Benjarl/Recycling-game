@@ -494,3 +494,21 @@
 2020-07-10T04:04:50.9225761+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
 2020-07-10T04:04:51.0701803+08:00|10|INFO|DataSync.Log|TransmissionSent. TransmissionId: e6aa8ada3e934b99bf19b8f7e518d71f(0-1). Capacity: 0. 
 2020-07-10T04:04:51.0701803+08:00|10|WARN|DataSync.Log|SenderEnqueueNoCapacity. TransmissionCount: 0. Capacity: 0. 
+2020-07-26T03:58:58.7650148+08:00|1|INFO|DataSync.Log|Storage folder: D:\unity\Trash\Assets\TestData\TestStore successfully validated. 
+2020-07-26T03:58:58.9575030+08:00|9|INFO|DataSync.Log|StorageSize. StorageSize: 0. 
+2020-07-26T03:58:59.0253192+08:00|9|INFO|DataSync.Log|MovedFromStorageToSender. 
+2020-07-26T03:58:59.0891479+08:00|9|INFO|DataSync.Log|MovedFromStorageToBuffer. 
+2020-07-26T03:58:59.1540320+08:00|9|INFO|DataSync.Log|MovedFromBufferToSender. 
+2020-07-26T03:59:17.6959825+08:00|1|INFO|DataSync.Log|Transmitter flushed telemetry events. 
+2020-07-26T03:59:17.7159284+08:00|1|INFO|DataSync.Log|SerializationStarted. Items count: 2 
+2020-07-26T03:59:17.8286277+08:00|1|INFO|DataSync.Log|TransmitterEnqueue. TransmissionId: ff2b8efa5b284074bc3eb797189e9589(0-1). 
+2020-07-26T03:59:17.8396009+08:00|1|INFO|DataSync.Log|TransmissionSendStarted. TransmissionId: ff2b8efa5b284074bc3eb797189e9589(0-1). 
+2020-07-26T03:59:17.9034269+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed sender capacity to 0 
+2020-07-26T03:59:17.9034269+08:00|1|INFO|DataSync.Log|DataSync.ApplicationLifecycleTransmissionPolicy changed buffer capacity to 0 
+2020-07-26T03:59:17.9203812+08:00|1|INFO|DataSync.Log|StorageCapacityReset: DataSync.ApplicationLifecycleTransmissionPolicy 
+2020-07-26T03:59:17.9313535+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-07-26T03:59:17.9313535+08:00|1|INFO|DataSync.Log|MovedFromBufferToStorage. 
+2020-07-26T03:59:17.9503015+08:00|1|INFO|DataSync.Log|TransmitterEmptyBuffer 
+2020-07-26T03:59:17.9612731+08:00|1|WARN|DataSync.Log|BufferEnqueueNoCapacity. Size: 0. Capacity: 0. 
+2020-07-26T03:59:18.6903228+08:00|11|INFO|DataSync.Log|TransmissionSent. TransmissionId: ff2b8efa5b284074bc3eb797189e9589(0-1). Capacity: 0. 
+2020-07-26T03:59:18.7022912+08:00|11|WARN|DataSync.Log|SenderEnqueueNoCapacity. TransmissionCount: 0. Capacity: 0. 

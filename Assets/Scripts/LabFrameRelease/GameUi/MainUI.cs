@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameData;
@@ -111,14 +110,14 @@ namespace TestGameFrame
 
             NextBotton.onClick.AddListener(delegate
             {
-                Mindfrog.Recycling.RecyclingScopeInput taskconfig = new Mindfrog.Recycling.RecyclingScopeInput();
+                RecyclingScopeInput taskconfig = new RecyclingScopeInput();
                 GameFlowData flowdata = new GameFlowData();
                 //搜尋對應現有的任務
                 List<string> temp = new List<string>();
-                temp = LabTools.GetDataName<Mindfrog.Recycling.RecyclingScopeInput>();
+                temp = LabTools.GetDataName<RecyclingScopeInput>();
                 for (int i = 0; i < temp.Count; i++)
                 {
-                    var tempData = LabTools.GetData<Mindfrog.Recycling.RecyclingScopeInput>(temp[i]);
+                    var tempData = LabTools.GetData<RecyclingScopeInput>(temp[i]);
                     if (temp[i] == Level.captionText.text)
                     {
                         taskconfig = tempData;

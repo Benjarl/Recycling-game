@@ -16,9 +16,9 @@ namespace TestGameFrame
         public static int number = 0;
         public static int day = 1;
         //垃圾編號
-        List<int> trashnumber = GameDataManager.GameData.Trashnumbers;
+        List<int> trashnumber;
         //需要時間
-        float TotalTime = GameDataManager.GameData.LimitTime;
+        float TotalTime;
         public static int i = 0;
         public Text Timedetext;
         public GameObject TimedttextO;
@@ -65,7 +65,9 @@ namespace TestGameFrame
             Wrongans.text = "";
             i = 0;
             UserName.text = GameDataManager.FlowData.UserId;
-           Level.text ="";
+            trashnumber = GameDataManager.GameData.Trashnumbers;
+            TotalTime = GameDataManager.GameData.LimitTime;
+            Level.text ="";
             if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) == 0)
                 Mode.text = "新手";
             else if (Convert.ToInt32(GameDataManager.GameData.GameDifficulty) == 1)
