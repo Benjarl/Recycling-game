@@ -100,7 +100,7 @@ namespace TestGameFrame
 
         void timer()
         {
-            Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
+            //Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
             timed--;
             Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 

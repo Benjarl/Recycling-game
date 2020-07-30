@@ -82,6 +82,8 @@ namespace TestGameFrame
 
         public GameObject TrashPanel;
 
+        public Text ttt;
+
         //MainUI
         public void Start()
         {
@@ -108,30 +110,7 @@ namespace TestGameFrame
             CreatePanel.SetActive(false);
             TrashPanel.SetActive(false);
 
-            NextBotton.onClick.AddListener(delegate
-            {
-                RecyclingScopeInput taskconfig = new RecyclingScopeInput();
-                GameFlowData flowdata = new GameFlowData();
-                //搜尋對應現有的任務
-                List<string> temp = new List<string>();
-                temp = LabTools.GetDataName<RecyclingScopeInput>();
-                for (int i = 0; i < temp.Count; i++)
-                {
-                    var tempData = LabTools.GetData<RecyclingScopeInput>(temp[i]);
-                    if (temp[i] == Level.captionText.text)
-                    {
-                        taskconfig = tempData;
-                        break;
-                    }
-                }
-                GameDataManager.LabDataManager.LabDataCollectInit(() => InputUserName.text);
-                GameDataManager.FlowData = flowdata;
-                GameDataManager.GameData = taskconfig;
-                GameDataManager.FlowData.UserId = InputUserName.text;
-                var GFData = new GameFlowData(InputUserName.text, taskconfig);
-                LabTools.WriteData(GFData, InputUserName.text, true);
-                GameSceneManager.Instance.Change2MainScene();
-            });
+            
 
             Leave.onClick.AddListener(delegate
             {
@@ -144,6 +123,45 @@ namespace TestGameFrame
                 SetLevelPanel.SetActive(true);
                 Setstart();
             });
+        }
+
+        //startbutton
+        public void buttonstartgame()
+        {
+            //RecyclingScopeInput taskconfig = new RecyclingScopeInput();
+            GameFlowData flowdata = new GameFlowData();
+            //搜尋對應現有的任務
+            List<string> temp = new List<string>();
+            temp = LabTools.GetDataName<RecyclingScopeInput>();
+            ttt.text = "1";
+            for (int i = 0; i<temp.Count; i++)
+            {
+                var tempData = LabTools.GetData<RecyclingScopeInput>(temp[i]);
+                if (temp[i] == Level.captionText.text)
+                {
+                    //taskconfig = tempData;
+                    var GFData = new GameFlowData()
+                    {
+                        UserId = InputUserName.text,
+                        TaskData = tempData
+                    };
+                    LabTools.WriteData(GFData, InputUserName.text, true);
+                    GameDataManager.GameData = tempData;
+                    ttt.text = "2";
+                    break;
+                }
+            }
+            GameDataManager.LabDataManager.LabDataCollectInit(() => InputUserName.text);
+            GameDataManager.FlowData = flowdata;
+            //GameDataManager.GameData = taskconfig;
+            GameDataManager.FlowData.UserId = InputUserName.text;
+            ttt.text = "3";
+            //var GFData = new GameFlowData(InputUserName.text, taskconfig);
+            ttt.text = "4";
+            //LabTools.WriteData(GFData, InputUserName.text, true);
+            ttt.text = "5";
+            GameSceneManager.Instance.Change2MainScene();
+            ttt.text = "6";
         }
 
         //SetUI
