@@ -124,7 +124,11 @@ public class GameApplication : MonoSingleton<GameApplication>
 
             //gameFlowData.HandGraspingInput = input;
 
+            var input = JsonConvert.DeserializeObject<Mindfrog.Recycling.RecyclingScopeInput>(data);
+
             gameFlowData.UserId = "Serve";
+
+            gameFlowData.TaskData = input;
 
             GameDataManager.FlowData = gameFlowData;
 

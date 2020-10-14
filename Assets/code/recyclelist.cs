@@ -49,6 +49,7 @@ namespace TestGameFrame
         public Text Rightans;
         public Text Wrongans;
         public Button Back;
+        private int endgametime = 6;
 
         //分數
         public int point = 0;
@@ -100,7 +101,7 @@ namespace TestGameFrame
 
         void timer()
         {
-            //Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
+            Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
             timed--;
             Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 
@@ -166,6 +167,8 @@ namespace TestGameFrame
                 Application.Quit();
             });
 
+            InvokeRepeating("endgame", 1, 1);
+
             Rightans.text = point + "/" + trashnumber.Count;
             GamePanel.SetActive(false);
             EndPanel.SetActive(true);
@@ -177,6 +180,17 @@ namespace TestGameFrame
                 Garbages = garbage,
             };
             GameDataManager.LabDataManager.SendData(RData);
+        }
+
+        void endgame()
+        {
+            endgametime--;
+            if(endgametime == 0)
+            {
+                CancelInvoke("endgame");
+                GameApplication.Instance.GameApplicationDispose();
+                Application.Quit();
+            }
         }
 
         void changetag(int number)  //分類

@@ -82,8 +82,6 @@ namespace TestGameFrame
 
         public GameObject TrashPanel;
 
-        public Text ttt;
-
         //MainUI
         public void Start()
         {
@@ -133,7 +131,6 @@ namespace TestGameFrame
             //搜尋對應現有的任務
             List<string> temp = new List<string>();
             temp = LabTools.GetDataName<RecyclingScopeInput>();
-            ttt.text = "1";
             for (int i = 0; i<temp.Count; i++)
             {
                 var tempData = LabTools.GetData<RecyclingScopeInput>(temp[i]);
@@ -147,21 +144,13 @@ namespace TestGameFrame
                     };
                     LabTools.WriteData(GFData, InputUserName.text, true);
                     GameDataManager.GameData = tempData;
-                    ttt.text = "2";
                     break;
                 }
             }
             GameDataManager.LabDataManager.LabDataCollectInit(() => InputUserName.text);
             GameDataManager.FlowData = flowdata;
-            //GameDataManager.GameData = taskconfig;
             GameDataManager.FlowData.UserId = InputUserName.text;
-            ttt.text = "3";
-            //var GFData = new GameFlowData(InputUserName.text, taskconfig);
-            ttt.text = "4";
-            //LabTools.WriteData(GFData, InputUserName.text, true);
-            ttt.text = "5";
             GameSceneManager.Instance.Change2MainScene();
-            ttt.text = "6";
         }
 
         //SetUI
