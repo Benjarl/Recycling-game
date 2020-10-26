@@ -126,9 +126,22 @@ public class GameApplication : MonoSingleton<GameApplication>
 
             var input = JsonConvert.DeserializeObject<Mindfrog.Recycling.RecyclingScopeInput>(data);
 
-            gameFlowData.UserId = "Serve";
+            if (input != null)
+            {
+                gameFlowData.TaskData = input;
+            }
 
-            gameFlowData.TaskData = input;
+            else
+            {
+                gameFlowData.TaskData = new Mindfrog.Recycling.RecyclingScopeInput()
+                {
+                    GameDifficulty = 0,
+                    LimitTime = 0,
+                    Trashnumbers = {
+                        1,2,3,4,5}
+                };
+                gameFlowData.UserId = "無名";
+            }
 
             GameDataManager.FlowData = gameFlowData;
 

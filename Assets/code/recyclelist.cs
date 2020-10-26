@@ -8,6 +8,7 @@ using LabData;
 using System.IO;
 using Valve.VR;
 using Mindfrog.Recycling;
+using UnityEngine.Diagnostics;
 
 namespace TestGameFrame
 {
@@ -49,7 +50,6 @@ namespace TestGameFrame
         public Text Rightans;
         public Text Wrongans;
         public Button Back;
-        private int endgametime = 6;
 
         //分數
         public int point = 0;
@@ -164,17 +164,32 @@ namespace TestGameFrame
             Back.onClick.AddListener(delegate
             {
                 GameApplication.Instance.GameApplicationDispose();
-                Application.Quit();
-            });
-
-            InvokeRepeating("endgame", 1, 1);
+                Application.Quit();          
+            });          
 
             Rightans.text = point + "/" + trashnumber.Count;
+
             GamePanel.SetActive(false);
             EndPanel.SetActive(true);
 
+            GameApplication.Instance.GameApplicationDispose();
+            Application.Quit();
+            ////存檔
+            //RData = new RecyclingScopeOutput() {
+            //    CorrectRate = Convert.ToSingle(point / trashnumber.Count),
+            //    AverageTime = Convert.ToSingle(Totaltimewaste / trashnumber.Count),
+            //    Garbages = garbage,
+            //};
+            //GameDataManager.LabDataManager.SendData(RData);
+
+            StartCoroutine(endgame());
+        }
+
+        void OnApplicationQuit()
+        {
             //存檔
-            RData = new RecyclingScopeOutput() {
+            RData = new RecyclingScopeOutput()
+            {
                 CorrectRate = Convert.ToSingle(point / trashnumber.Count),
                 AverageTime = Convert.ToSingle(Totaltimewaste / trashnumber.Count),
                 Garbages = garbage,
@@ -182,15 +197,10 @@ namespace TestGameFrame
             GameDataManager.LabDataManager.SendData(RData);
         }
 
-        void endgame()
+        IEnumerator endgame()
         {
-            endgametime--;
-            if(endgametime == 0)
-            {
-                CancelInvoke("endgame");
-                GameApplication.Instance.GameApplicationDispose();
-                Application.Quit();
-            }
+            yield return new WaitForSeconds(5);
+            Utils.ForceCrash(ForcedCrashCategory.AccessViolation);
         }
 
         void changetag(int number)  //分類
