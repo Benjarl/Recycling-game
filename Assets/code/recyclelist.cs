@@ -101,7 +101,7 @@ namespace TestGameFrame
 
         void timer()
         {
-            Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
+            //Allobject.transform.position = PositionCheck.transform.position + new Vector3(0f, 0f, 0.68f);
             timed--;
             Timedetext.text = "距離遊戲開始還有" + timed + "秒請將手把移至視線範圍內";
 
@@ -148,7 +148,7 @@ namespace TestGameFrame
                 Recyclelisttext.recycletext(number);
                 Recyclelisttext.recycleday(day);
                 changetag(number);
-                GameObject.Find("Trash." + number+"(Clone)").transform.position = Plaform.transform.position + new Vector3(0f, 0.1f, 0f);
+                GameObject.Find("Trash." + number+"(Clone)").transform.position = Plaform.transform.position + new Vector3(0f, 0.2f, 0f);
                 InvokeRepeating("timecost", 1, 1);
             }
         }
@@ -174,15 +174,16 @@ namespace TestGameFrame
 
             GameApplication.Instance.GameApplicationDispose();
             Application.Quit();
-            ////存檔
-            //RData = new RecyclingScopeOutput() {
-            //    CorrectRate = Convert.ToSingle(point / trashnumber.Count),
-            //    AverageTime = Convert.ToSingle(Totaltimewaste / trashnumber.Count),
-            //    Garbages = garbage,
-            //};
-            //GameDataManager.LabDataManager.SendData(RData);
+            //存檔
+            RData = new RecyclingScopeOutput()
+            {
+                CorrectRate = Convert.ToSingle(point / trashnumber.Count),
+                AverageTime = Convert.ToSingle(Totaltimewaste / trashnumber.Count),
+                Garbages = garbage,
+            };
+            GameDataManager.LabDataManager.SendData(RData);
 
-            StartCoroutine(endgame());
+            //StartCoroutine(endgame());
         }
 
         void OnApplicationQuit()

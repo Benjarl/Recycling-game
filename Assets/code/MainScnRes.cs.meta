@@ -3,7 +3,93 @@ guid: bf6b0c22e2eaff5489ff3ec0e55ec97e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Trash1: {instanceID: 0}
+  - Trash2: {instanceID: 0}
+  - Trash3: {instanceID: 0}
+  - Trash4: {instanceID: 0}
+  - Trash5: {instanceID: 0}
+  - Trash6: {instanceID: 0}
+  - Trash7: {instanceID: 0}
+  - Trash8: {instanceID: 0}
+  - Trash9: {instanceID: 0}
+  - Trash10: {instanceID: 0}
+  - Trash11: {instanceID: 0}
+  - Trash12: {instanceID: 0}
+  - Trash13: {instanceID: 0}
+  - Trash14: {instanceID: 0}
+  - Trash15: {instanceID: 0}
+  - Trash16: {instanceID: 0}
+  - Trash17: {instanceID: 0}
+  - Trash18: {instanceID: 0}
+  - Trash19: {instanceID: 0}
+  - Trash20: {instanceID: 0}
+  - Trash21: {instanceID: 0}
+  - Trash22: {instanceID: 0}
+  - Trash23: {instanceID: 0}
+  - Trash24: {instanceID: 0}
+  - Trash25: {instanceID: 0}
+  - Trash26: {instanceID: 0}
+  - Trash27: {instanceID: 0}
+  - Trash28: {instanceID: 0}
+  - Trash29: {instanceID: 0}
+  - Trash30: {instanceID: 0}
+  - Trash31: {instanceID: 0}
+  - Trash32: {instanceID: 0}
+  - Trash33: {instanceID: 0}
+  - Trash34: {instanceID: 0}
+  - Trash35: {instanceID: 0}
+  - Trash36: {instanceID: 0}
+  - Trash37: {instanceID: 0}
+  - Trash38: {instanceID: 0}
+  - Trash39: {instanceID: 0}
+  - Trash40: {instanceID: 0}
+  - Trash41: {instanceID: 0}
+  - Trash42: {instanceID: 0}
+  - Trash43: {instanceID: 0}
+  - Trash44: {instanceID: 0}
+  - Trash45: {instanceID: 0}
+  - Trash46: {instanceID: 0}
+  - Trash47: {instanceID: 0}
+  - Trash48: {instanceID: 0}
+  - Trash49: {instanceID: 0}
+  - Trash50: {instanceID: 0}
+  - Trash51: {instanceID: 0}
+  - Trash52: {instanceID: 0}
+  - Trash53: {instanceID: 0}
+  - Trash54: {instanceID: 0}
+  - Trash55: {instanceID: 0}
+  - Trash56: {instanceID: 0}
+  - Trash57: {instanceID: 0}
+  - Trash58: {instanceID: 0}
+  - Trash59: {instanceID: 0}
+  - Trash60: {instanceID: 0}
+  - Trash61: {instanceID: 0}
+  - Trash62: {instanceID: 0}
+  - Trash63: {instanceID: 0}
+  - Trash64: {instanceID: 0}
+  - Trash65: {instanceID: 0}
+  - Trash66: {instanceID: 0}
+  - Trash67: {instanceID: 0}
+  - Trash68: {instanceID: 0}
+  - Trash69: {instanceID: 0}
+  - Trash70: {instanceID: 0}
+  - Trash71: {instanceID: 0}
+  - Trash72: {instanceID: 0}
+  - Trash73: {instanceID: 0}
+  - Trash74: {instanceID: 0}
+  - Trash75: {instanceID: 0}
+  - Trash76: {instanceID: 0}
+  - Trash77: {instanceID: 0}
+  - Trash78: {instanceID: 0}
+  - Trash79: {instanceID: 0}
+  - Trash80: {instanceID: 0}
+  - Trash81: {instanceID: 0}
+  - Trash82: {instanceID: 0}
+  - Trash83: {instanceID: 0}
+  - Trash84: {instanceID: 0}
+  - Trash85: {instanceID: 0}
+  - MianSceneUI: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
