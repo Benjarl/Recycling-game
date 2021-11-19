@@ -1,0 +1,1 @@
+{"CorrectRate":0.0,"AverageTime":4.0,"Garbages":[{"GarbageIDP":2,"IsSuccess":false,"TimeToUse":10.0},{"GarbageIDP":4,"IsSuccess":true,"TimeToUse":5.0},{"GarbageIDP":6,"IsSuccess":true,"TimeToUse":1.0},{"GarbageIDP":45,"IsSuccess":true,"TimeToUse":3.0}],"Timestamp":"2021-11-20T03:29:36.4393291+09:00","Sequence":null,"GlobalData":{}}
